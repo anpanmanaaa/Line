@@ -2,358 +2,375 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>LINE OGP Encoder</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0a0a0f;--panel:#0d0d14;--border:#7fffb230;
-  --accent:#7fffb2;--accent2:#ff7f50;--dim:#7fffb260;--text:#e0ffe8;
-  --font:'Space Mono',monospace;
-  --tap:44px;
+:root {
+  --bg:#0a0a0f; --panel:#0d0d14; --panel2:#111118;
+  --border:#7fffb230; --border2:#7fffb250;
+  --accent:#7fffb2; --accent2:#ff7f50;
+  --dim:#7fffb260; --text:#e0ffe8;
+  --f:'Space Mono',monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
 body{
-  background:var(--bg);color:var(--text);
-  font-family:var(--font);min-height:100vh;
-  display:flex;flex-direction:column;
+  background:var(--bg);color:var(--text);font-family:var(--f);
+  min-height:100vh;display:flex;flex-direction:column;
 }
 
-/* ── menubar（デスクトップ） ── */
+/* ── Menubar ───────────────────────────── */
 .menubar{
-  height:30px;background:#111118;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;padding:0 12px;gap:14px;
+  height:28px;background:var(--panel2);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;padding:0 10px;gap:14px;
   position:sticky;top:0;z-index:200;font-size:11px;color:var(--dim);
   user-select:none;flex-shrink:0;
 }
-.traffic{display:flex;gap:5px}
-.traffic span{width:10px;height:10px;border-radius:50%;display:inline-block;flex-shrink:0}
-.traffic .r{background:#ff5f57}.traffic .y{background:#ffbd2e}.traffic .g{background:#28c840}
-.menu-item{cursor:pointer;padding:2px 6px;transition:color .15s;min-height:var(--tap);display:flex;align-items:center}
-.menu-item:hover,.menu-item:active{color:var(--accent)}
-.bar-title{flex:1;text-align:center;font-size:10px;letter-spacing:.12em;color:var(--dim)}
-.bar-worker{font-size:9px;color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:160px}
+.traffic{display:flex;gap:5px;margin-right:4px}
+.traffic span{width:10px;height:10px;border-radius:50%;display:inline-block}
+.t-r{background:#ff5f57}.t-y{background:#ffbd2e}.t-g{background:#28c840}
+.menu-item{cursor:pointer;padding:2px 5px;transition:color .15s;white-space:nowrap}
+.menu-item:hover{color:var(--accent)}
+.menubar .title{flex:1;text-align:center;font-size:9.5px;letter-spacing:.1em;color:var(--dim)}
+.worker-tag{font-size:.55rem;color:var(--dim);white-space:nowrap}
+@media(max-width:480px){
+  .worker-tag{display:none}
+  .menubar .title{font-size:8.5px}
+}
 
-/* ── main ── */
+/* ── App ───────────────────────────────── */
 .app{
-  flex:1;display:flex;flex-direction:column;
-  align-items:center;padding:24px 16px 60px;gap:16px;
-  width:100%;
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  padding:2rem 1rem 5rem;gap:1.5rem;
 }
 
 .header{text-align:center}
-.header h1{font-size:13px;letter-spacing:.25em;color:var(--accent);text-transform:uppercase}
-.header p{margin-top:4px;font-size:10px;color:var(--dim);letter-spacing:.08em;line-height:1.6}
+.header h1{font-size:.9rem;letter-spacing:.22em;color:var(--accent);text-transform:uppercase}
+.header p{margin-top:.35rem;font-size:.58rem;color:var(--dim);letter-spacing:.08em;line-height:1.5}
 
-/* ── card ── */
+/* ── Card ──────────────────────────────── */
 .card{
   width:100%;max-width:600px;
-  background:var(--panel);border:1px solid var(--border);
-  padding:16px;
+  background:var(--panel);border:1px solid var(--border);padding:1.4rem 1.5rem;
 }
 .card-title{
-  font-size:9px;letter-spacing:.2em;color:var(--dim);
-  margin-bottom:12px;display:flex;align-items:center;gap:8px;
+  font-size:.55rem;letter-spacing:.2em;color:var(--dim);
+  margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;
 }
 .card-title::after{content:'';flex:1;height:1px;background:var(--border)}
 
-label{font-size:10px;letter-spacing:.12em;color:var(--dim);display:block;margin-bottom:6px}
-
-/* inputs */
+/* ── Form ──────────────────────────────── */
+.fg{margin-bottom:.9rem}
+label{
+  font-size:.55rem;letter-spacing:.13em;color:var(--dim);
+  display:block;margin-bottom:.3rem;
+}
 textarea,input[type="text"]{
   width:100%;background:#13131d;border:1px solid var(--border);
-  color:var(--text);font-family:var(--font);font-size:14px;
-  padding:10px 12px;outline:none;transition:border-color .2s;
+  color:var(--text);font-family:var(--f);font-size:.78rem;
+  padding:.55rem .65rem;outline:none;transition:border-color .2s;
   -webkit-appearance:none;border-radius:0;
+  min-height:44px; /* touch target */
 }
-textarea{resize:vertical;min-height:80px;line-height:1.6}
+textarea{resize:vertical;min-height:76px;line-height:1.6}
 textarea:focus,input[type="text"]:focus{border-color:var(--accent)}
 textarea::placeholder,input::placeholder{color:var(--dim)}
 
-.form-group{margin-bottom:14px}
-
 /* URL row */
-.url-row{display:flex;gap:8px}
+.url-row{display:flex;gap:.5rem}
 .url-row input{flex:1;min-width:0}
 .url-check{
-  flex-shrink:0;font-family:var(--font);font-size:10px;letter-spacing:.1em;
+  font-family:var(--f);font-size:.58rem;letter-spacing:.1em;
   border:1px solid var(--border);background:transparent;color:var(--dim);
-  padding:0 14px;cursor:pointer;white-space:nowrap;
-  min-height:var(--tap);transition:border-color .2s,color .2s;
-  -webkit-appearance:none;border-radius:0;
+  padding:0 .75rem;cursor:pointer;white-space:nowrap;transition:border-color .2s,color .2s;
+  min-height:44px;flex-shrink:0;
 }
-.url-check:hover,.url-check:active{border-color:var(--accent);color:var(--accent)}
-.url-status{margin-top:5px;font-size:10px;min-height:14px;line-height:1}
-.url-status.ok{color:var(--accent)}.url-status.err{color:var(--accent2)}
+.url-check:hover{border-color:var(--accent);color:var(--accent)}
+.url-st{margin-top:.28rem;font-size:.58rem;min-height:.9rem}
+.url-st.ok{color:var(--accent)}.url-st.er{color:var(--accent2)}
 
-/* drop zone */
-.drop-zone{
+/* Drop zone */
+.drop{
   border:1px dashed var(--border);background:#13131d;
-  min-height:72px;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:6px;
-  cursor:pointer;transition:border-color .2s;padding:16px;position:relative;
+  min-height:64px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:.35rem;
+  cursor:pointer;transition:border-color .2s;padding:.9rem;
+  position:relative;
 }
-.drop-zone:hover,.drop-zone.dragover,.drop-zone:active{border-color:var(--accent)}
-.drop-zone .hint{font-size:10px;color:var(--dim);letter-spacing:.1em;pointer-events:none;text-align:center}
-.drop-zone .hint-sub{font-size:9px;color:var(--dim);opacity:.6;pointer-events:none}
-.drop-zone input[type="file"]{
+.drop:hover,.drop.over{border-color:var(--accent)}
+.drop .hint{font-size:.58rem;color:var(--dim);letter-spacing:.1em;pointer-events:none;text-align:center}
+.drop input[type="file"]{
   position:absolute;inset:0;opacity:0;cursor:pointer;
   width:100%;height:100%;padding:0;border:none;
 }
-.img-preview{width:100%;max-height:160px;object-fit:contain;border:1px solid var(--border);display:none;margin-top:8px}
-.img-preview.show{display:block}
-.img-info{font-size:10px;color:var(--dim);margin-top:4px}
+.img-pre{width:100%;max-height:130px;object-fit:contain;border:1px solid var(--border);display:none;margin-top:.45rem}
+.img-pre.show{display:block}
+.img-info{font-size:.55rem;color:var(--dim);margin-top:.25rem}
 
-/* buttons */
-.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+/* Buttons */
+.btn-row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.9rem}
 button{
-  font-family:var(--font);font-size:11px;letter-spacing:.12em;
-  cursor:pointer;padding:0 18px;
-  min-height:var(--tap);
+  font-family:var(--f);font-size:.65rem;letter-spacing:.13em;
+  cursor:pointer;padding:.55rem 1rem;min-height:44px;
   border:1px solid var(--accent);background:transparent;color:var(--accent);
   text-transform:uppercase;transition:background .15s,color .15s;
   -webkit-appearance:none;border-radius:0;
-  flex:1;
 }
 button:hover,button:active{background:var(--accent);color:var(--bg)}
 button:disabled{opacity:.4;cursor:not-allowed}
-button.danger{border-color:var(--accent2);color:var(--accent2);flex:0 0 auto}
-button.danger:hover,button.danger:active{background:var(--accent2);color:var(--bg)}
-button.fixed{flex:0 0 auto}
-
-/* output */
-.output-card{display:none}
-.output-card.visible{display:block}
-.result-url{
-  background:#13131d;border:1px solid var(--border);
-  padding:12px;font-size:13px;color:var(--accent);
-  word-break:break-all;line-height:1.6;position:relative;
-  cursor:pointer;
+button.d{border-color:var(--accent2);color:var(--accent2)}
+button.d:hover,button.d:active{background:var(--accent2);color:var(--bg)}
+@media(max-width:480px){
+  .btn-row{flex-direction:column}
+  .btn-row button{width:100%;justify-content:center}
 }
-.result-url:active{border-color:var(--accent)}
-.copy-badge{
-  position:absolute;top:6px;right:6px;font-size:8px;
-  color:var(--bg);background:var(--accent);padding:2px 8px;
+
+/* Loader */
+.loader{display:none;align-items:center;gap:.6rem;font-size:.62rem;color:var(--accent);letter-spacing:.1em;margin-top:.7rem}
+.loader.show{display:flex}
+.spin{width:13px;height:13px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:sp .6s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* Output */
+.out-card{display:none}
+.out-card.vis{display:block}
+.res-url{
+  background:#13131d;border:1px solid var(--border);
+  padding:.75rem;font-size:.75rem;color:var(--accent);
+  word-break:break-all;line-height:1.6;position:relative;
+}
+.cp-badge{
+  position:absolute;top:.4rem;right:.4rem;font-size:.5rem;
+  color:var(--bg);background:var(--accent);padding:2px 6px;
   opacity:0;transition:opacity .3s;pointer-events:none;
 }
-.copy-badge.show{opacity:1}
-.id-row{margin-top:6px;font-size:10px;color:var(--dim)}
+.cp-badge.show{opacity:1}
+.id-row{margin-top:.45rem;font-size:.58rem;color:var(--dim)}
 
-/* loader */
-.loader{display:none;align-items:center;gap:10px;font-size:10px;color:var(--accent);letter-spacing:.1em;margin-top:12px}
-.loader.show{display:flex}
-.spinner{width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .6s linear infinite;flex-shrink:0}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* history */
-.history-list{display:flex;flex-direction:column;gap:8px}
-.hist-item{
+/* History */
+.hist-list{display:flex;flex-direction:column;gap:.45rem}
+.hi{
   background:var(--panel);border:1px solid var(--border);
-  padding:10px 12px;display:flex;align-items:center;
-  gap:10px;font-size:12px;cursor:pointer;transition:border-color .15s;
-  min-height:var(--tap);
+  padding:.55rem .8rem;display:flex;align-items:center;
+  gap:.55rem;font-size:.65rem;cursor:pointer;transition:border-color .15s;
 }
-.hist-item:hover,.hist-item:active{border-color:var(--accent)}
-.hist-thumb{width:36px;height:36px;object-fit:cover;border:1px solid var(--border);flex-shrink:0}
-.hist-thumb-empty{width:36px;height:36px;background:#1a1a25;flex-shrink:0;border:1px solid var(--border)}
-.hist-thumb-url{
-  width:36px;height:36px;background:#13131d;flex-shrink:0;
-  border:1px solid var(--accent2);display:flex;align-items:center;
-  justify-content:center;font-size:8px;color:var(--accent2);
-}
-.hist-text{color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px}
-.hist-id{color:var(--dim);font-size:9px;flex-shrink:0}
-.hist-copy{
-  color:var(--accent2);font-size:9px;flex-shrink:0;
-  padding:6px 8px;border:1px solid var(--accent2);
-  letter-spacing:.08em;
-}
+.hi:hover{border-color:var(--accent)}
+.hi-thumb{width:30px;height:30px;object-fit:cover;border:1px solid var(--border);flex-shrink:0}
+.hi-empty{width:30px;height:30px;background:#1a1a25;flex-shrink:0;border:1px solid var(--border)}
+.hi-url-icon{width:30px;height:30px;background:#13131d;flex-shrink:0;border:1px solid var(--accent2);display:flex;align-items:center;justify-content:center;font-size:.48rem;color:var(--accent2)}
+.hi-text{color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.hi-id{color:var(--dim);font-size:.55rem;flex-shrink:0}
+.hi-copy{color:var(--accent2);font-size:.55rem;flex-shrink:0;padding:4px;min-height:0}
+@media(max-width:480px){.hi-id{display:none}}
 
-/* notif */
+/* ── Bug Report Modal ──────────────────── */
+.modal-bg{
+  display:none;position:fixed;inset:0;background:#000a;
+  z-index:500;align-items:center;justify-content:center;padding:1rem;
+}
+.modal-bg.show{display:flex}
+.modal{
+  background:var(--panel);border:1px solid var(--border2);
+  padding:1.5rem;width:100%;max-width:480px;
+  box-shadow:0 0 60px #7fffb218;
+}
+.modal-title{font-size:.7rem;letter-spacing:.2em;color:var(--accent);margin-bottom:.9rem;display:flex;justify-content:space-between;align-items:center}
+.modal-close{cursor:pointer;color:var(--dim);font-size:1rem;line-height:1;padding:4px;min-height:0;border:none;background:none;font-family:var(--f)}
+.modal-close:hover{color:var(--accent2)}
+.modal textarea{min-height:110px;margin-bottom:.8rem}
+.modal-note{font-size:.55rem;color:var(--dim);line-height:1.5;margin-bottom:.8rem}
+.modal-status{font-size:.62rem;margin-top:.5rem;min-height:.9rem}
+.modal-status.ok{color:var(--accent)}.modal-status.er{color:var(--accent2)}
+
+/* ── Notification ──────────────────────── */
 .notif{
-  position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(12px);
+  position:fixed;bottom:1.2rem;right:1rem;left:1rem;
   background:var(--accent);color:var(--bg);
-  font-size:11px;letter-spacing:.12em;padding:8px 18px;
-  opacity:0;transition:opacity .25s,transform .25s;
-  pointer-events:none;z-index:999;white-space:nowrap;
+  font-size:.62rem;letter-spacing:.1em;padding:.5rem .9rem;
+  opacity:0;transform:translateY(6px);
+  transition:opacity .25s,transform .25s;pointer-events:none;z-index:999;
+  text-align:center;max-width:400px;margin:0 auto;
 }
-.notif.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.notif.err{background:var(--accent2)}
-
-/* ── responsive ── */
-@media(min-width:600px){
-  button{flex:0 0 auto}
-  .menubar{height:26px}
-}
-@media(max-width:400px){
-  .bar-worker{display:none}
-  .bar-title{font-size:9px}
+.notif.show{opacity:1;transform:translateY(0)}
+.notif.er{background:var(--accent2)}
+@media(min-width:480px){
+  .notif{left:auto;right:1.5rem;max-width:300px;text-align:left;margin:0}
 }
 </style>
 </head>
 <body>
 
+<!-- ── Menubar ─────────────────────────── -->
 <div class="menubar">
   <div class="traffic">
-    <span class="r"></span><span class="y"></span><span class="g"></span>
+    <span class="t-r"></span><span class="t-y"></span><span class="t-g"></span>
   </div>
   <span class="menu-item" onclick="toggleHistory()">History</span>
-  <div class="bar-title">LINE OGP ENCODER</div>
-  <span class="bar-worker">proud-mode-cd1a</span>
+  <span class="menu-item" onclick="openBugModal()">Bug Report</span>
+  <div class="title">LINE OGP ENCODER v3.0</div>
+  <span class="worker-tag">proud-mode-cd1a</span>
 </div>
 
+<!-- ── App ────────────────────────────── -->
 <div class="app">
 
   <div class="header">
     <h1>OGP Link Encoder</h1>
-    <p>テキスト / URL / 画像 → 短いリンク → LINE プレビュー</p>
+    <p>テキスト / URL / 画像 → 短いリンク → LINE プレビュー＆サイト埋め込み</p>
   </div>
 
   <!-- Compose -->
   <div class="card">
     <div class="card-title">COMPOSE</div>
 
-    <div class="form-group">
-      <label>メッセージ（省略可）</label>
-      <textarea id="msgInput" placeholder="LINEのプレビューに表示するテキスト..."></textarea>
+    <div class="fg">
+      <label>メッセージ (og:title / description)</label>
+      <textarea id="msgInput" placeholder="LINEに表示したいテキスト（省略可）..."></textarea>
     </div>
 
-    <div class="form-group">
-      <label>リンク先URL（省略可）</label>
+    <div class="fg">
+      <label>リンク先URL（任意）— プロキシ経由でサイトを埋め込み表示</label>
       <div class="url-row">
-        <input type="url" id="urlInput" placeholder="https://example.com" inputmode="url" oninput="onUrlInput()">
-        <button class="url-check fixed" onclick="checkUrl()">CHECK</button>
+        <input type="text" id="urlInput" placeholder="https://example.com" oninput="onUrlInput()">
+        <button class="url-check" onclick="checkUrl()">CHECK</button>
       </div>
-      <div class="url-status" id="urlStatus"></div>
+      <div class="url-st" id="urlSt"></div>
     </div>
 
-    <div class="form-group">
-      <label>画像（省略可）</label>
-      <div class="drop-zone" id="dropZone">
-        <input type="file" id="fileInput" accept="image/*" onchange="onFileChange(event)">
-        <span class="hint">TAP TO SELECT IMAGE</span>
-        <span class="hint-sub">or drop here</span>
+    <div class="fg">
+      <label>画像（任意）— クリックまたはドロップ</label>
+      <div class="drop" id="dropZone">
+        <input type="file" id="fileInput" accept="image/*" onchange="onFile(event)">
+        <span class="hint">CLICK OR DROP IMAGE HERE</span>
       </div>
-      <img class="img-preview" id="imgPreview" alt="preview">
+      <img class="img-pre" id="imgPre" alt="preview">
       <div class="img-info" id="imgInfo"></div>
     </div>
 
     <div class="btn-row">
-      <button id="genBtn" onclick="doGenerate()">Generate Link</button>
-      <button class="danger" onclick="clearAll()">Clear</button>
+      <button id="genBtn" onclick="doGen()">Generate Link</button>
+      <button class="d" onclick="clearAll()">Clear</button>
     </div>
-    <div class="loader" id="loader">
-      <div class="spinner"></div><span>UPLOADING...</span>
-    </div>
+    <div class="loader" id="loader"><div class="spin"></div><span>UPLOADING...</span></div>
   </div>
 
   <!-- Output -->
-  <div class="output-card card" id="outputCard">
-    <div class="card-title">LINK</div>
-    <div style="position:relative" onclick="copyLink()">
-      <div class="result-url" id="resultUrl"></div>
-      <div class="copy-badge" id="copyBadge">COPIED!</div>
+  <div class="out-card card" id="outCard">
+    <div class="card-title">GENERATED LINK</div>
+    <div style="position:relative">
+      <div class="res-url" id="resUrl"></div>
+      <div class="cp-badge" id="cpBadge">COPIED!</div>
     </div>
     <div class="id-row" id="idRow"></div>
     <div class="btn-row">
-      <button onclick="copyLink()">Copy</button>
+      <button onclick="copyLink()">Copy Link</button>
       <button onclick="openLink()">Open</button>
     </div>
   </div>
 
   <!-- History -->
-  <div class="card" id="historyCard" style="display:none">
+  <div class="card" id="histCard" style="display:none">
     <div class="card-title">HISTORY</div>
-    <div class="history-list" id="historyList"></div>
-    <div class="btn-row">
-      <button class="danger" onclick="clearHistory()">Clear History</button>
-    </div>
+    <div class="hist-list" id="histList"></div>
+    <div class="btn-row"><button class="d" onclick="clearHist()">Clear History</button></div>
   </div>
 
+</div><!-- /app -->
+
+<!-- ── Bug Report Modal ──────────────── -->
+<div class="modal-bg" id="bugModal" onclick="onModalBg(event)">
+  <div class="modal">
+    <div class="modal-title">
+      <span>BUG REPORT</span>
+      <button class="modal-close" onclick="closeBugModal()">✕</button>
+    </div>
+    <div class="modal-note">
+      エラー内容・再現手順・ブラウザなどを記入してください。<br>
+      管理者のみ閲覧可能です。
+    </div>
+    <textarea id="bugText" placeholder="例: プロキシでCSSが崩れる。URL: https://... ブラウザ: Safari iOS 17"></textarea>
+    <div class="btn-row" style="margin-top:0">
+      <button id="bugBtn" onclick="submitBug()">Send Report</button>
+      <button class="d" onclick="closeBugModal()">Cancel</button>
+    </div>
+    <div class="modal-status" id="bugSt"></div>
+  </div>
 </div>
 
 <div class="notif" id="notif"></div>
 
 <script>
-const WORKER_BASE = "https://proud-mode-cd1a.a6068376.workers.dev";
-const HIST_KEY    = "ogp_hist_v2";
+const WORKER = "https://proud-mode-cd1a.a6068376.workers.dev";
+const HIST_KEY = "ogp_hist_v3";
 
-let currentUrl = "";
-let imageB64   = null;
-let imageMime  = null;
+let curUrl  = "";
+let imgB64  = null;
+let imgMime = null;
 
-// ── drag & drop ───────────────────────────────────────────
+// ── Drag & Drop ─────────────────────────
 const dz = document.getElementById("dropZone");
-dz.addEventListener("dragover",  e => { e.preventDefault(); dz.classList.add("dragover"); });
-dz.addEventListener("dragleave", () => dz.classList.remove("dragover"));
+dz.addEventListener("dragover",  e => { e.preventDefault(); dz.classList.add("over"); });
+dz.addEventListener("dragleave", () => dz.classList.remove("over"));
 dz.addEventListener("drop", e => {
-  e.preventDefault(); dz.classList.remove("dragover");
-  const f = e.dataTransfer?.files?.[0];
-  if (f) loadImage(f);
+  e.preventDefault(); dz.classList.remove("over");
+  const f = e.dataTransfer?.files?.[0]; if (f) loadImg(f);
 });
-function onFileChange(e) { const f = e.target.files?.[0]; if (f) loadImage(f); }
+function onFile(e) { const f = e.target.files?.[0]; if (f) loadImg(f); }
 
-function loadImage(file) {
+function loadImg(file) {
   if (!file.type.startsWith("image/")) { notify("画像ファイルを選択してください", true); return; }
-  const reader = new FileReader();
-  reader.onload = ev => {
+  const r = new FileReader();
+  r.onload = ev => {
     const img = new Image();
     img.onload = () => {
       const MAX = 1200;
       let w = img.width, h = img.height;
-      if (w > MAX || h > MAX) {
-        const r = Math.min(MAX/w, MAX/h); w = Math.round(w*r); h = Math.round(h*r);
-      }
-      const canvas = document.createElement("canvas");
-      canvas.width = w; canvas.height = h;
-      canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+      if (w > MAX || h > MAX) { const s = Math.min(MAX/w, MAX/h); w = Math.round(w*s); h = Math.round(h*s); }
+      const c = document.createElement("canvas");
+      c.width = w; c.height = h;
+      c.getContext("2d").drawImage(img, 0, 0, w, h);
       const mime = file.type === "image/png" ? "image/png" : "image/jpeg";
-      const b64  = canvas.toDataURL(mime, mime === "image/jpeg" ? 0.82 : undefined);
-      imageB64 = b64; imageMime = mime;
-      const kb = Math.round(b64.length * 3/4 / 1024);
-      document.getElementById("imgPreview").src = b64;
-      document.getElementById("imgPreview").classList.add("show");
+      const b64  = c.toDataURL(mime, mime === "image/jpeg" ? 0.82 : undefined);
+      imgB64 = b64; imgMime = mime;
+      const kb = Math.round(b64.length * .75 / 1024);
+      document.getElementById("imgPre").src = b64;
+      document.getElementById("imgPre").classList.add("show");
       document.getElementById("imgInfo").textContent = `${w}×${h}px  ~${kb}KB`;
     };
     img.src = ev.target.result;
   };
-  reader.readAsDataURL(file);
+  r.readAsDataURL(file);
 }
 
-// ── URL check ────────────────────────────────────────────
+// ── URL check ───────────────────────────
 function onUrlInput() {
-  const el = document.getElementById("urlStatus");
-  el.textContent = ""; el.className = "url-status";
+  document.getElementById("urlSt").textContent = "";
+  document.getElementById("urlSt").className   = "url-st";
 }
 function checkUrl() {
-  const val = document.getElementById("urlInput").value.trim();
-  const el  = document.getElementById("urlStatus");
-  if (!val) return;
-  try { new URL(val); el.textContent = "✓ OK"; el.className = "url-status ok"; }
-  catch { el.textContent = "✗ URLの形式が正しくありません"; el.className = "url-status err"; }
+  const v  = document.getElementById("urlInput").value.trim();
+  const el = document.getElementById("urlSt");
+  if (!v) return;
+  try { new URL(v); el.textContent = "✓ 有効なURLです"; el.className = "url-st ok"; }
+  catch { el.textContent = "✗ URLの形式が正しくありません"; el.className = "url-st er"; }
 }
 
-// ── generate ─────────────────────────────────────────────
-async function doGenerate() {
+// ── Generate ─────────────────────────────
+async function doGen() {
   const text   = document.getElementById("msgInput").value.trim();
   const urlVal = document.getElementById("urlInput").value.trim();
-  if (!text && !imageB64 && !urlVal) {
-    notify("テキスト・URL・画像のいずれかを入力", true); return;
+  if (!text && !imgB64 && !urlVal) {
+    notify("テキスト・URL・画像のいずれかを入力してください", true); return;
   }
-  if (urlVal) {
-    try { new URL(urlVal); }
-    catch { notify("URLの形式が正しくありません", true); return; }
-  }
-
-  setLoading(true);
+  setLoad(true);
   try {
     const body = { text };
-    if (urlVal)   { body.url      = urlVal; }
-    if (imageB64) { body.imageB64 = imageB64; body.mimeType = imageMime; }
+    if (urlVal) body.url      = urlVal;
+    if (imgB64) { body.imageB64 = imgB64; body.mimeType = imgMime; }
 
-    const res = await fetch(`${WORKER_BASE}/store`, {
+    const res = await fetch(`${WORKER}/store`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -361,130 +378,129 @@ async function doGenerate() {
     if (!res.ok) throw new Error(await res.text());
 
     const { id, url } = await res.json();
-    currentUrl = url;
+    curUrl = url;
+    document.getElementById("resUrl").textContent = url;
+    document.getElementById("idRow").textContent  = `id: ${id}  (90日で期限切れ)`;
+    document.getElementById("outCard").classList.add("vis");
 
-    document.getElementById("resultUrl").textContent = url;
-    document.getElementById("idRow").textContent     = `id: ${id}  (90日)`;
-    document.getElementById("outputCard").classList.add("visible");
-
-    const hist  = getHistory();
-    const entry = { id, url, text, targetUrl: urlVal, hasImage: !!imageB64, ts: Date.now() };
-    localStorage.setItem(HIST_KEY,
-      JSON.stringify([entry, ...hist.filter(h => h.id !== id)].slice(0, 30))
-    );
-    renderHistory();
-    notify("生成完了！");
-
-    // スクロールして見せる
-    document.getElementById("outputCard").scrollIntoView({ behavior: "smooth", block: "nearest" });
-  } catch (err) {
-    notify("エラー: " + err.message, true);
+    const hist  = getHist();
+    const entry = { id, url, text, targetUrl: urlVal, hasImage: !!imgB64, ts: Date.now() };
+    saveHist([entry, ...hist.filter(h => h.id !== id)].slice(0, 30));
+    renderHist();
+    notify("リンク生成完了！");
+  } catch (e) {
+    notify("エラー: " + e.message, true);
   } finally {
-    setLoading(false);
+    setLoad(false);
   }
 }
 
-function setLoading(v) {
+function setLoad(v) {
   document.getElementById("loader").classList.toggle("show", v);
   document.getElementById("genBtn").disabled = v;
 }
-
 function copyLink() {
-  if (!currentUrl) return;
-  navigator.clipboard.writeText(currentUrl).then(() => {
-    const b = document.getElementById("copyBadge");
+  if (!curUrl) return;
+  navigator.clipboard.writeText(curUrl).then(() => {
+    const b = document.getElementById("cpBadge");
     b.classList.add("show"); setTimeout(() => b.classList.remove("show"), 1800);
-    notify("コピーしました");
-  }).catch(() => {
-    // iOS fallback
-    const ta = document.createElement("textarea");
-    ta.value = currentUrl; ta.style.position = "fixed"; ta.style.opacity = "0";
-    document.body.appendChild(ta); ta.focus(); ta.select();
-    document.execCommand("copy");
-    document.body.removeChild(ta);
     notify("コピーしました");
   });
 }
-function openLink() { if (currentUrl) window.open(currentUrl, "_blank"); }
-
+function openLink() { if (curUrl) window.open(curUrl, "_blank"); }
 function clearAll() {
-  document.getElementById("msgInput").value = "";
-  document.getElementById("urlInput").value = "";
-  document.getElementById("urlStatus").textContent = "";
-  document.getElementById("urlStatus").className = "url-status";
-  document.getElementById("imgPreview").classList.remove("show");
-  document.getElementById("imgPreview").src = "";
+  ["msgInput","urlInput"].forEach(id => document.getElementById(id).value = "");
+  document.getElementById("urlSt").textContent = "";
+  document.getElementById("imgPre").classList.remove("show");
+  document.getElementById("imgPre").src = "";
   document.getElementById("imgInfo").textContent = "";
   document.getElementById("fileInput").value = "";
-  document.getElementById("outputCard").classList.remove("visible");
-  imageB64 = null; imageMime = null; currentUrl = "";
+  document.getElementById("outCard").classList.remove("vis");
+  imgB64 = null; imgMime = null; curUrl = "";
 }
 
-// ── history ───────────────────────────────────────────────
-function getHistory() {
-  try { return JSON.parse(localStorage.getItem(HIST_KEY) || "[]"); } catch { return []; }
-}
+// ── History ──────────────────────────────
+function getHist() { try { return JSON.parse(localStorage.getItem(HIST_KEY) || "[]"); } catch { return []; } }
+function saveHist(a) { localStorage.setItem(HIST_KEY, JSON.stringify(a)); }
 function toggleHistory() {
-  const c = document.getElementById("historyCard");
+  const c = document.getElementById("histCard");
   c.style.display = c.style.display === "none" ? "block" : "none";
-  if (c.style.display === "block") {
-    renderHistory();
-    c.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  }
+  if (c.style.display === "block") renderHist();
 }
-function clearHistory() {
-  localStorage.removeItem(HIST_KEY); renderHistory(); notify("履歴を削除しました");
-}
-function renderHistory() {
-  const list = document.getElementById("historyList");
-  const hist = getHistory();
-  if (!hist.length) {
-    list.innerHTML = '<div style="font-size:10px;color:var(--dim)">履歴なし</div>'; return;
-  }
+function clearHist() { saveHist([]); renderHist(); notify("履歴を削除しました"); }
+function renderHist() {
+  const list = document.getElementById("histList");
+  const hist = getHist();
+  if (!hist.length) { list.innerHTML = '<div style="font-size:.62rem;color:var(--dim)">履歴なし</div>'; return; }
   list.innerHTML = hist.map((h, i) => {
-    let thumb;
-    if (h.hasImage)      thumb = `<img class="hist-thumb" src="${WORKER_BASE}/img/${h.id}" alt="">`;
-    else if (h.targetUrl)thumb = `<div class="hist-thumb-url">URL</div>`;
-    else                  thumb = `<div class="hist-thumb-empty"></div>`;
-    return `<div class="hist-item" onclick="reuseHist(${i})">
-      ${thumb}
-      <div class="hist-text">${escHtml(h.text || h.targetUrl || "(画像のみ)")}</div>
-      <div class="hist-id">${escHtml(h.id)}</div>
-      <div class="hist-copy" onclick="event.stopPropagation();copyText('${escHtml(h.url)}')">COPY</div>
+    let th = h.hasImage
+      ? `<img class="hi-thumb" src="${WORKER}/img/${h.id}" loading="lazy" alt="">`
+      : h.targetUrl
+        ? `<div class="hi-url-icon">URL</div>`
+        : `<div class="hi-empty"></div>`;
+    return `<div class="hi" onclick="reuse(${i})">
+      ${th}
+      <div class="hi-text">${eh(h.text || h.targetUrl || "(画像のみ)")}</div>
+      <div class="hi-id">${eh(h.id)}</div>
+      <span class="hi-copy" onclick="event.stopPropagation();cp('${eh(h.url)}')">COPY</span>
     </div>`;
   }).join("");
 }
-function reuseHist(i) {
-  const h = getHistory()[i]; currentUrl = h.url;
-  document.getElementById("resultUrl").textContent = h.url;
-  document.getElementById("idRow").textContent     = `id: ${h.id}`;
-  document.getElementById("outputCard").classList.add("visible");
-  document.getElementById("outputCard").scrollIntoView({ behavior: "smooth", block: "nearest" });
+function reuse(i) {
+  const h = getHist()[i];
+  curUrl = h.url;
+  document.getElementById("resUrl").textContent = h.url;
+  document.getElementById("idRow").textContent  = `id: ${h.id}`;
+  document.getElementById("outCard").classList.add("vis");
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
-function copyText(s) {
-  navigator.clipboard.writeText(s)
-    .then(() => notify("コピーしました"))
-    .catch(() => {
-      const ta = document.createElement("textarea");
-      ta.value = s; ta.style.position="fixed"; ta.style.opacity="0";
-      document.body.appendChild(ta); ta.focus(); ta.select();
-      document.execCommand("copy"); document.body.removeChild(ta);
-      notify("コピーしました");
+function cp(s) { navigator.clipboard.writeText(s).then(() => notify("コピーしました")); }
+
+// ── Bug Report ────────────────────────────
+function openBugModal()  { document.getElementById("bugModal").classList.add("show"); }
+function closeBugModal() { document.getElementById("bugModal").classList.remove("show"); }
+function onModalBg(e) { if (e.target === document.getElementById("bugModal")) closeBugModal(); }
+
+async function submitBug() {
+  const desc = document.getElementById("bugText").value.trim();
+  const st   = document.getElementById("bugSt");
+  if (!desc) { st.textContent = "内容を入力してください"; st.className = "modal-status er"; return; }
+
+  document.getElementById("bugBtn").disabled = true;
+  st.textContent = "送信中..."; st.className = "modal-status";
+
+  try {
+    const res = await fetch(`${WORKER}/report`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ description: desc }),
     });
+    if (!res.ok) throw new Error(await res.text());
+    st.textContent = "✓ 送信しました。ありがとうございます！";
+    st.className   = "modal-status ok";
+    document.getElementById("bugText").value = "";
+    setTimeout(closeBugModal, 1800);
+  } catch (e) {
+    st.textContent = "エラー: " + e.message;
+    st.className   = "modal-status er";
+  } finally {
+    document.getElementById("bugBtn").disabled = false;
+  }
 }
 
+// ── Notify ────────────────────────────────
 function notify(msg, err = false) {
   const el = document.getElementById("notif");
-  el.textContent = msg; el.classList.toggle("err", err);
-  el.classList.add("show"); setTimeout(() => el.classList.remove("show"), 2200);
+  el.textContent = msg;
+  el.classList.toggle("er", err);
+  el.classList.add("show");
+  setTimeout(() => el.classList.remove("show"), 2400);
 }
-function escHtml(s) {
-  return String(s)
-    .replace(/&/g,"&amp;").replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+function eh(s) {
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 }
 
-renderHistory();
+renderHist();
 </script>
 </body>
 </html>
