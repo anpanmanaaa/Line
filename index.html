@@ -8,163 +8,131 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:     #0a0a0f;
-  --panel:  #0d0d14;
-  --border: #7fffb230;
-  --accent: #7fffb2;
-  --accent2:#ff7f50;
-  --dim:    #7fffb260;
-  --text:   #e0ffe8;
-  --app-font: 'Space Mono', monospace;
+  --bg:#0a0a0f; --panel:#0d0d14; --border:#7fffb230;
+  --accent:#7fffb2; --accent2:#ff7f50; --dim:#7fffb260;
+  --text:#e0ffe8; --app-font:'Space Mono',monospace;
 }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  background: var(--bg); color: var(--text);
-  font-family: var(--app-font); min-height: 100vh;
-  display: flex; flex-direction: column;
-}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--app-font);min-height:100vh;display:flex;flex-direction:column}
 
-/* menubar */
-.menubar {
-  height: 26px; background: #111118;
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center;
-  padding: 0 12px; gap: 16px;
-  position: sticky; top: 0; z-index: 100;
-  font-size: 11px; color: var(--dim); user-select: none;
+.menubar{
+  height:26px;background:#111118;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;padding:0 12px;gap:16px;
+  position:sticky;top:0;z-index:100;font-size:11px;color:var(--dim);user-select:none;
 }
-.traffic { display: flex; gap: 5px; margin-right: 6px; }
-.traffic span { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-.traffic .r { background: #ff5f57; }
-.traffic .y { background: #ffbd2e; }
-.traffic .g { background: #28c840; }
-.menu-item { cursor: pointer; padding: 0 4px; transition: color .15s; }
-.menu-item:hover { color: var(--accent); }
-.title { flex: 1; text-align: center; font-size: 10px; letter-spacing: .12em; color: var(--dim); }
+.traffic{display:flex;gap:5px;margin-right:6px}
+.traffic span{width:10px;height:10px;border-radius:50%;display:inline-block}
+.traffic .r{background:#ff5f57}.traffic .y{background:#ffbd2e}.traffic .g{background:#28c840}
+.menu-item{cursor:pointer;padding:0 4px;transition:color .15s}
+.menu-item:hover{color:var(--accent)}
+.title{flex:1;text-align:center;font-size:10px;letter-spacing:.12em;color:var(--dim)}
 
-/* layout */
-.app {
-  flex: 1; display: flex; flex-direction: column;
-  align-items: center; padding: 3rem 1.5rem 4rem; gap: 2rem;
-}
-.header { text-align: center; }
-.header h1 { font-size: 1rem; letter-spacing: .25em; color: var(--accent); text-transform: uppercase; }
-.header p  { margin-top: .4rem; font-size: .65rem; color: var(--dim); letter-spacing: .1em; }
+.app{flex:1;display:flex;flex-direction:column;align-items:center;padding:3rem 1.5rem 4rem;gap:2rem}
+.header{text-align:center}
+.header h1{font-size:1rem;letter-spacing:.25em;color:var(--accent);text-transform:uppercase}
+.header p{margin-top:.4rem;font-size:.65rem;color:var(--dim);letter-spacing:.1em}
 
-/* card */
-.card {
-  width: 100%; max-width: 620px;
-  background: var(--panel); border: 1px solid var(--border); padding: 1.6rem 1.8rem;
-}
-.card-title {
-  font-size: .6rem; letter-spacing: .2em; color: var(--dim);
-  margin-bottom: .8rem; display: flex; align-items: center; gap: .5rem;
-}
-.card-title::after { content:''; flex:1; height:1px; background: var(--border); }
+.card{width:100%;max-width:620px;background:var(--panel);border:1px solid var(--border);padding:1.6rem 1.8rem}
+.card-title{font-size:.6rem;letter-spacing:.2em;color:var(--dim);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.card-title::after{content:'';flex:1;height:1px;background:var(--border)}
 
-label { font-size: .58rem; letter-spacing: .15em; color: var(--dim); display: block; margin-bottom: .35rem; }
+label{font-size:.58rem;letter-spacing:.15em;color:var(--dim);display:block;margin-bottom:.35rem}
 
-textarea, input[type="text"], select {
-  width: 100%; background: #13131d; border: 1px solid var(--border);
-  color: var(--text); font-family: var(--app-font); font-size: .8rem;
-  padding: .55rem .7rem; outline: none; transition: border-color .2s;
+textarea,input[type="text"]{
+  width:100%;background:#13131d;border:1px solid var(--border);
+  color:var(--text);font-family:var(--app-font);font-size:.8rem;
+  padding:.55rem .7rem;outline:none;transition:border-color .2s;
 }
-textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
-textarea:focus, input[type="text"]:focus, select:focus { border-color: var(--accent); }
-textarea::placeholder, input::placeholder { color: var(--dim); }
+textarea{resize:vertical;min-height:72px;line-height:1.6}
+textarea:focus,input[type="text"]:focus{border-color:var(--accent)}
+textarea::placeholder,input::placeholder{color:var(--dim)}
 
-.form-group { margin-bottom: 1rem; }
+.form-group{margin-bottom:1rem}
 
-/* image drop zone */
-.drop-zone {
-  border: 1px dashed var(--border); background: #13131d;
-  min-height: 80px; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: .4rem;
-  cursor: pointer; transition: border-color .2s; padding: 1rem;
-  position: relative;
+/* URL入力 */
+.url-row{display:flex;gap:.5rem;align-items:stretch}
+.url-row input{flex:1}
+.url-check{
+  font-family:var(--app-font);font-size:.6rem;letter-spacing:.1em;
+  border:1px solid var(--border);background:transparent;color:var(--dim);
+  padding:0 .8rem;cursor:pointer;white-space:nowrap;transition:border-color .2s,color .2s;
 }
-.drop-zone:hover, .drop-zone.dragover { border-color: var(--accent); }
-.drop-zone .hint { font-size: .62rem; color: var(--dim); letter-spacing: .1em; pointer-events: none; }
-.drop-zone input[type="file"] {
-  position: absolute; inset: 0; opacity: 0; cursor: pointer;
-  width: 100%; height: 100%; padding: 0; border: none;
-}
-.img-preview {
-  width: 100%; max-height: 160px; object-fit: contain;
-  border: 1px solid var(--border); display: none; margin-top: .5rem;
-}
-.img-preview.show { display: block; }
-.img-info { font-size: .58rem; color: var(--dim); margin-top: .3rem; }
+.url-check:hover{border-color:var(--accent);color:var(--accent)}
+.url-status{margin-top:.3rem;font-size:.6rem;min-height:.9rem}
+.url-status.ok{color:var(--accent)}.url-status.err{color:var(--accent2)}
 
-/* buttons */
-.btn-row { display: flex; gap: .8rem; flex-wrap: wrap; margin-top: 1rem; }
-button {
-  font-family: var(--app-font); font-size: .68rem; letter-spacing: .14em;
-  cursor: pointer; padding: .5rem 1.1rem;
-  border: 1px solid var(--accent); background: transparent; color: var(--accent);
-  text-transform: uppercase; transition: background .15s, color .15s;
+/* 画像 */
+.drop-zone{
+  border:1px dashed var(--border);background:#13131d;min-height:72px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.4rem;cursor:pointer;transition:border-color .2s;padding:1rem;position:relative;
 }
-button:hover { background: var(--accent); color: var(--bg); }
-button:disabled { opacity: .4; cursor: not-allowed; }
-button.danger { border-color: var(--accent2); color: var(--accent2); }
-button.danger:hover { background: var(--accent2); color: var(--bg); }
+.drop-zone:hover,.drop-zone.dragover{border-color:var(--accent)}
+.drop-zone .hint{font-size:.62rem;color:var(--dim);letter-spacing:.1em;pointer-events:none}
+.drop-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;padding:0;border:none}
+.img-preview{width:100%;max-height:140px;object-fit:contain;border:1px solid var(--border);display:none;margin-top:.5rem}
+.img-preview.show{display:block}
+.img-info{font-size:.58rem;color:var(--dim);margin-top:.3rem}
+
+/* btns */
+.btn-row{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1rem}
+button{
+  font-family:var(--app-font);font-size:.68rem;letter-spacing:.14em;
+  cursor:pointer;padding:.5rem 1.1rem;
+  border:1px solid var(--accent);background:transparent;color:var(--accent);
+  text-transform:uppercase;transition:background .15s,color .15s;
+}
+button:hover{background:var(--accent);color:var(--bg)}
+button:disabled{opacity:.4;cursor:not-allowed}
+button.danger{border-color:var(--accent2);color:var(--accent2)}
+button.danger:hover{background:var(--accent2);color:var(--bg)}
 
 /* output */
-.output-card { display: none; }
-.output-card.visible { display: block; }
-
-.result-url {
-  background: #13131d; border: 1px solid var(--border);
-  padding: .8rem; font-size: .78rem; color: var(--accent);
-  word-break: break-all; line-height: 1.6; position: relative;
+.output-card{display:none}
+.output-card.visible{display:block}
+.result-url{
+  background:#13131d;border:1px solid var(--border);
+  padding:.8rem;font-size:.78rem;color:var(--accent);
+  word-break:break-all;line-height:1.6;position:relative;
 }
-.copy-badge {
-  position: absolute; top: .4rem; right: .4rem;
-  font-size: .5rem; color: var(--bg); background: var(--accent);
-  padding: 2px 6px; opacity: 0; transition: opacity .3s; pointer-events: none;
+.copy-badge{
+  position:absolute;top:.4rem;right:.4rem;font-size:.5rem;
+  color:var(--bg);background:var(--accent);padding:2px 6px;
+  opacity:0;transition:opacity .3s;pointer-events:none;
 }
-.copy-badge.show { opacity: 1; }
-
-.id-row { margin-top: .5rem; font-size: .6rem; color: var(--dim); }
+.copy-badge.show{opacity:1}
+.id-row{margin-top:.5rem;font-size:.6rem;color:var(--dim)}
 
 /* loader */
-.loader {
-  display: none; align-items: center; gap: .7rem;
-  font-size: .65rem; color: var(--accent); letter-spacing: .1em;
-}
-.loader.show { display: flex; }
-.spinner {
-  width: 14px; height: 14px;
-  border: 2px solid var(--border); border-top-color: var(--accent);
-  border-radius: 50%; animation: spin .6s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
+.loader{display:none;align-items:center;gap:.7rem;font-size:.65rem;color:var(--accent);letter-spacing:.1em}
+.loader.show{display:flex}
+.spinner{width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 
 /* history */
-.history-list { display: flex; flex-direction: column; gap: .5rem; }
-.hist-item {
-  background: var(--panel); border: 1px solid var(--border);
-  padding: .6rem .9rem; display: flex; align-items: center;
-  gap: .6rem; font-size: .68rem; cursor: pointer; transition: border-color .15s;
+.history-list{display:flex;flex-direction:column;gap:.5rem}
+.hist-item{
+  background:var(--panel);border:1px solid var(--border);
+  padding:.6rem .9rem;display:flex;align-items:center;
+  gap:.6rem;font-size:.68rem;cursor:pointer;transition:border-color .15s;
 }
-.hist-item:hover { border-color: var(--accent); }
-.hist-thumb { width: 32px; height: 32px; object-fit: cover; border: 1px solid var(--border); flex-shrink: 0; }
-.hist-thumb-empty { width: 32px; height: 32px; background: #1a1a25; flex-shrink: 0; border: 1px solid var(--border); }
-.hist-text { color: var(--text); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.hist-id   { color: var(--dim); font-size: .58rem; flex-shrink: 0; }
-.hist-copy { color: var(--accent2); font-size: .58rem; flex-shrink: 0; }
+.hist-item:hover{border-color:var(--accent)}
+.hist-thumb{width:32px;height:32px;object-fit:cover;border:1px solid var(--border);flex-shrink:0}
+.hist-thumb-empty{width:32px;height:32px;background:#1a1a25;flex-shrink:0;border:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+.hist-thumb-url{width:32px;height:32px;background:#13131d;flex-shrink:0;border:1px solid var(--accent2);display:flex;align-items:center;justify-content:center;font-size:.5rem;color:var(--accent2)}
+.hist-text{color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hist-id{color:var(--dim);font-size:.58rem;flex-shrink:0}
+.hist-copy{color:var(--accent2);font-size:.58rem;flex-shrink:0}
 
-/* notif */
-.notif {
-  position: fixed; bottom: 1.5rem; right: 1.5rem;
-  background: var(--accent); color: var(--bg);
-  font-size: .65rem; letter-spacing: .12em; padding: .5rem 1rem;
-  opacity: 0; transform: translateY(8px);
-  transition: opacity .25s, transform .25s;
-  pointer-events: none; z-index: 999;
+.notif{
+  position:fixed;bottom:1.5rem;right:1.5rem;
+  background:var(--accent);color:var(--bg);
+  font-size:.65rem;letter-spacing:.12em;padding:.5rem 1rem;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .25s,transform .25s;pointer-events:none;z-index:999;
 }
-.notif.show { opacity: 1; transform: translateY(0); }
-.notif.err  { background: var(--accent2); }
+.notif.show{opacity:1;transform:translateY(0)}
+.notif.err{background:var(--accent2)}
 </style>
 </head>
 <body>
@@ -175,7 +143,7 @@ button.danger:hover { background: var(--accent2); color: var(--bg); }
   </div>
   <span class="menu-item">File</span>
   <span class="menu-item" onclick="toggleHistory()">History</span>
-  <div class="title">LINE OGP ENCODER — v2.0</div>
+  <div class="title">LINE OGP ENCODER — v2.1</div>
   <span style="font-size:.6rem;color:var(--dim)">proud-mode-cd1a</span>
 </div>
 
@@ -183,20 +151,28 @@ button.danger:hover { background: var(--accent2); color: var(--bg); }
 
   <div class="header">
     <h1>OGP Link Encoder</h1>
-    <p>テキスト + 画像を KV に保存 → 短いリンクを生成 → LINE プレビューに表示</p>
+    <p>テキスト / URL / 画像 → 短いリンク → LINE プレビュー表示</p>
   </div>
 
-  <!-- Compose -->
   <div class="card">
     <div class="card-title">COMPOSE</div>
 
     <div class="form-group">
-      <label>メッセージ（og:title / og:description に使用）</label>
-      <textarea id="msgInput" placeholder="LINEに表示したいテキストを入力..."></textarea>
+      <label>メッセージ（og:title / description）</label>
+      <textarea id="msgInput" placeholder="LINEに表示したいテキスト（省略可）..."></textarea>
     </div>
 
     <div class="form-group">
-      <label>画像（任意） — クリックまたはドロップ / 最大 800px にリサイズ</label>
+      <label>リンク先URL（任意） — クリックでサイト内に表示</label>
+      <div class="url-row">
+        <input type="text" id="urlInput" placeholder="https://example.com" oninput="onUrlInput()">
+        <button class="url-check" onclick="checkUrl()">CHECK</button>
+      </div>
+      <div class="url-status" id="urlStatus"></div>
+    </div>
+
+    <div class="form-group">
+      <label>画像（任意） — クリックまたはドロップ</label>
       <div class="drop-zone" id="dropZone">
         <input type="file" id="fileInput" accept="image/*" onchange="onFileChange(event)">
         <span class="hint">CLICK OR DROP IMAGE HERE</span>
@@ -209,14 +185,9 @@ button.danger:hover { background: var(--accent2); color: var(--bg); }
       <button id="genBtn" onclick="doGenerate()">Generate Link</button>
       <button class="danger" onclick="clearAll()">Clear</button>
     </div>
-
-    <div class="loader" id="loader">
-      <div class="spinner"></div>
-      <span>UPLOADING...</span>
-    </div>
+    <div class="loader" id="loader"><div class="spinner"></div><span>UPLOADING...</span></div>
   </div>
 
-  <!-- Output -->
   <div class="output-card card" id="outputCard">
     <div class="card-title">GENERATED LINK</div>
     <div style="position:relative">
@@ -230,7 +201,6 @@ button.danger:hover { background: var(--accent2); color: var(--bg); }
     </div>
   </div>
 
-  <!-- History -->
   <div class="card" id="historyCard" style="display:none">
     <div class="card-title">HISTORY</div>
     <div class="history-list" id="historyList"></div>
@@ -245,9 +215,9 @@ button.danger:hover { background: var(--accent2); color: var(--bg); }
 const WORKER_BASE = "https://proud-mode-cd1a.a6068376.workers.dev";
 const HIST_KEY    = "ogp_hist_v2";
 
-let currentUrl    = "";
-let imageB64      = null;
-let imageMime     = null;
+let currentUrl = "";
+let imageB64   = null;
+let imageMime  = null;
 
 // ── drag & drop ───────────────────────────────────────────
 const dz = document.getElementById("dropZone");
@@ -258,13 +228,8 @@ dz.addEventListener("drop", e => {
   const file = e.dataTransfer?.files?.[0];
   if (file) loadImage(file);
 });
+function onFileChange(e) { const f = e.target.files?.[0]; if (f) loadImage(f); }
 
-function onFileChange(e) {
-  const file = e.target.files?.[0];
-  if (file) loadImage(file);
-}
-
-// ── 画像リサイズ → base64 ─────────────────────────────────
 function loadImage(file) {
   if (!file.type.startsWith("image/")) { notify("画像ファイルを選択してください", true); return; }
   const reader = new FileReader();
@@ -273,51 +238,64 @@ function loadImage(file) {
     img.onload = () => {
       const MAX = 1200;
       let w = img.width, h = img.height;
-      if (w > MAX || h > MAX) {
-        const r = Math.min(MAX / w, MAX / h);
-        w = Math.round(w * r); h = Math.round(h * r);
-      }
+      if (w > MAX || h > MAX) { const r = Math.min(MAX/w, MAX/h); w = Math.round(w*r); h = Math.round(h*r); }
       const canvas = document.createElement("canvas");
       canvas.width = w; canvas.height = h;
       canvas.getContext("2d").drawImage(img, 0, 0, w, h);
-
       const mime = file.type === "image/png" ? "image/png" : "image/jpeg";
-      const q    = mime === "image/jpeg" ? 0.82 : undefined;
-      const b64  = canvas.toDataURL(mime, q);
-
-      imageB64  = b64;
-      imageMime = mime;
-
-      // サイズ表示
-      const kb = Math.round((b64.length * 3/4) / 1024);
+      const b64  = canvas.toDataURL(mime, mime === "image/jpeg" ? 0.82 : undefined);
+      imageB64 = b64; imageMime = mime;
+      const kb = Math.round(b64.length * 3/4 / 1024);
       document.getElementById("imgPreview").src = b64;
       document.getElementById("imgPreview").classList.add("show");
-      document.getElementById("imgInfo").textContent =
-        `${w} × ${h} px  /  ~${kb} KB (エンコード後)`;
+      document.getElementById("imgInfo").textContent = `${w} × ${h} px  /  ~${kb} KB`;
     };
     img.src = ev.target.result;
   };
   reader.readAsDataURL(file);
 }
 
+// ── URL ───────────────────────────────────────────────────
+function onUrlInput() {
+  document.getElementById("urlStatus").textContent = "";
+  document.getElementById("urlStatus").className   = "url-status";
+}
+
+async function checkUrl() {
+  const val = document.getElementById("urlInput").value.trim();
+  if (!val) return;
+  const el = document.getElementById("urlStatus");
+  el.textContent = "確認中..."; el.className = "url-status";
+  try {
+    new URL(val); // 形式チェック
+    el.textContent = "✓ 有効なURLです";
+    el.className = "url-status ok";
+  } catch {
+    el.textContent = "✗ URLの形式が正しくありません";
+    el.className = "url-status err";
+  }
+}
+
 // ── 生成 ──────────────────────────────────────────────────
 async function doGenerate() {
-  const text = document.getElementById("msgInput").value.trim();
-  if (!text && !imageB64) { notify("テキストまたは画像を入力してください", true); return; }
+  const text   = document.getElementById("msgInput").value.trim();
+  const urlVal = document.getElementById("urlInput").value.trim();
+  if (!text && !imageB64 && !urlVal) {
+    notify("テキスト・URL・画像のいずれかを入力してください", true); return;
+  }
 
   setLoading(true);
-
   try {
     const body = { text };
+    if (urlVal)   { body.url      = urlVal; }
     if (imageB64) { body.imageB64 = imageB64; body.mimeType = imageMime; }
 
-    const res  = await fetch(`${WORKER_BASE}/store`, {
+    const res = await fetch(`${WORKER_BASE}/store`, {
       method:  "POST",
       headers: { "Content-Type": "application/json" },
       body:    JSON.stringify(body),
     });
-
-    if (!res.ok) { const t = await res.text(); throw new Error(t); }
+    if (!res.ok) throw new Error(await res.text());
 
     const { id, url } = await res.json();
     currentUrl = url;
@@ -326,14 +304,10 @@ async function doGenerate() {
     document.getElementById("idRow").textContent     = `id: ${id}  (90日で期限切れ)`;
     document.getElementById("outputCard").classList.add("visible");
 
-    // 履歴保存
     const hist  = getHistory();
-    const entry = { id, url, text, hasImage: !!imageB64, ts: Date.now() };
-    const dedup = hist.filter(h => h.id !== id);
-    dedup.unshift(entry);
-    localStorage.setItem(HIST_KEY, JSON.stringify(dedup.slice(0, 30)));
+    const entry = { id, url, text, targetUrl: urlVal, hasImage: !!imageB64, ts: Date.now() };
+    localStorage.setItem(HIST_KEY, JSON.stringify([entry, ...hist.filter(h=>h.id!==id)].slice(0,30)));
     renderHistory();
-
     notify("リンク生成完了！");
   } catch (err) {
     notify("エラー: " + err.message, true);
@@ -346,13 +320,11 @@ function setLoading(v) {
   document.getElementById("loader").classList.toggle("show", v);
   document.getElementById("genBtn").disabled = v;
 }
-
 function copyLink() {
   if (!currentUrl) return;
   navigator.clipboard.writeText(currentUrl).then(() => {
     const b = document.getElementById("copyBadge");
-    b.classList.add("show");
-    setTimeout(() => b.classList.remove("show"), 1800);
+    b.classList.add("show"); setTimeout(() => b.classList.remove("show"), 1800);
     notify("コピーしました");
   });
 }
@@ -360,6 +332,8 @@ function openLink() { if (currentUrl) window.open(currentUrl, "_blank"); }
 
 function clearAll() {
   document.getElementById("msgInput").value = "";
+  document.getElementById("urlInput").value = "";
+  document.getElementById("urlStatus").textContent = "";
   document.getElementById("imgPreview").classList.remove("show");
   document.getElementById("imgPreview").src = "";
   document.getElementById("imgInfo").textContent = "";
@@ -369,9 +343,7 @@ function clearAll() {
 }
 
 // ── history ───────────────────────────────────────────────
-function getHistory() {
-  try { return JSON.parse(localStorage.getItem(HIST_KEY) || "[]"); } catch { return []; }
-}
+function getHistory() { try { return JSON.parse(localStorage.getItem(HIST_KEY) || "[]"); } catch { return []; } }
 function toggleHistory() {
   const c = document.getElementById("historyCard");
   c.style.display = c.style.display === "none" ? "block" : "none";
@@ -382,16 +354,18 @@ function renderHistory() {
   const list = document.getElementById("historyList");
   const hist = getHistory();
   if (!hist.length) { list.innerHTML = '<div style="font-size:.65rem;color:var(--dim)">履歴なし</div>'; return; }
-  list.innerHTML = hist.map((h, i) => `
-    <div class="hist-item" onclick="reuseHist(${i})">
-      ${h.hasImage
-        ? `<img class="hist-thumb" src="${WORKER_BASE}/img/${h.id}" alt="">`
-        : `<div class="hist-thumb-empty"></div>`}
-      <div class="hist-text">${escHtml(h.text || "(画像のみ)")}</div>
+  list.innerHTML = hist.map((h, i) => {
+    let thumb;
+    if (h.hasImage) thumb = `<img class="hist-thumb" src="${WORKER_BASE}/img/${h.id}" alt="">`;
+    else if (h.targetUrl) thumb = `<div class="hist-thumb-url">URL</div>`;
+    else thumb = `<div class="hist-thumb-empty"></div>`;
+    return `<div class="hist-item" onclick="reuseHist(${i})">
+      ${thumb}
+      <div class="hist-text">${escHtml(h.text || h.targetUrl || "(画像のみ)")}</div>
       <div class="hist-id">${escHtml(h.id)}</div>
       <div class="hist-copy" onclick="event.stopPropagation();copyText('${escHtml(h.url)}')">COPY</div>
-    </div>
-  `).join("");
+    </div>`;
+  }).join("");
 }
 function reuseHist(i) {
   const h = getHistory()[i];
@@ -402,18 +376,14 @@ function reuseHist(i) {
 }
 function copyText(s) { navigator.clipboard.writeText(s).then(() => notify("コピーしました")); }
 
-// ── notify ────────────────────────────────────────────────
 function notify(msg, err = false) {
   const el = document.getElementById("notif");
-  el.textContent = msg;
-  el.classList.toggle("err", err);
-  el.classList.add("show");
-  setTimeout(() => el.classList.remove("show"), 2200);
+  el.textContent = msg; el.classList.toggle("err", err);
+  el.classList.add("show"); setTimeout(() => el.classList.remove("show"), 2200);
 }
 function escHtml(s) {
   return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 }
-
 renderHistory();
 </script>
 </body>
