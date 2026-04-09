@@ -10,153 +10,103 @@
 :root {
   --bg:#0a0a0f; --panel:#0d0d14; --panel2:#111118;
   --border:#7fffb230; --border2:#7fffb250;
-  --accent:#7fffb2; --accent2:#ff7f50;
+  --accent:#7fffb2; --accent2:#ff7f50; --accent3:#b07fff;
   --dim:#7fffb260; --text:#e0ffe8;
   --f:'Space Mono',monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
-body{
-  background:var(--bg);color:var(--text);font-family:var(--f);
-  min-height:100vh;display:flex;flex-direction:column;
-}
+body{background:var(--bg);color:var(--text);font-family:var(--f);min-height:100vh;display:flex;flex-direction:column}
 
-/* ── Menubar ───────────────────────────── */
-.menubar{
-  height:28px;background:var(--panel2);border-bottom:1px solid var(--border);
+.menubar{height:28px;background:var(--panel2);border-bottom:1px solid var(--border);
   display:flex;align-items:center;padding:0 10px;gap:14px;
-  position:sticky;top:0;z-index:200;font-size:11px;color:var(--dim);
-  user-select:none;flex-shrink:0;
-}
+  position:sticky;top:0;z-index:200;font-size:11px;color:var(--dim);user-select:none;flex-shrink:0}
 .traffic{display:flex;gap:5px;margin-right:4px}
 .traffic span{width:10px;height:10px;border-radius:50%;display:inline-block}
 .t-r{background:#ff5f57}.t-y{background:#ffbd2e}.t-g{background:#28c840}
 .menu-item{cursor:pointer;padding:2px 5px;transition:color .15s;white-space:nowrap}
 .menu-item:hover{color:var(--accent)}
 .menubar .title{flex:1;text-align:center;font-size:9.5px;letter-spacing:.1em;color:var(--dim)}
-.worker-tag{font-size:.55rem;color:var(--dim);white-space:nowrap}
-@media(max-width:480px){
-  .worker-tag{display:none}
-  .menubar .title{font-size:8.5px}
-}
+.admin-badge{font-size:.5rem;background:var(--accent3);color:#0a0a0f;padding:1px 5px;letter-spacing:.08em}
+@media(max-width:480px){.menubar .title{font-size:8px}}
 
-/* ── App ───────────────────────────────── */
-.app{
-  flex:1;display:flex;flex-direction:column;align-items:center;
-  padding:2rem 1rem 5rem;gap:1.5rem;
-}
-
+.app{flex:1;display:flex;flex-direction:column;align-items:center;padding:2rem 1rem 5rem;gap:1.5rem}
 .header{text-align:center}
 .header h1{font-size:.9rem;letter-spacing:.22em;color:var(--accent);text-transform:uppercase}
 .header p{margin-top:.35rem;font-size:.58rem;color:var(--dim);letter-spacing:.08em;line-height:1.5}
 
-/* ── Card ──────────────────────────────── */
-.card{
-  width:100%;max-width:600px;
-  background:var(--panel);border:1px solid var(--border);padding:1.4rem 1.5rem;
-}
-.card-title{
-  font-size:.55rem;letter-spacing:.2em;color:var(--dim);
-  margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;
-}
+.card{width:100%;max-width:600px;background:var(--panel);border:1px solid var(--border);padding:1.4rem 1.5rem}
+.card.admin-card{border-color:var(--accent3)40}
+.card-title{font-size:.55rem;letter-spacing:.2em;color:var(--dim);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
 .card-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.card-title.admin-title{color:var(--accent3)}
+.card-title.admin-title::after{background:var(--accent3)40}
 
-/* ── Form ──────────────────────────────── */
 .fg{margin-bottom:.9rem}
-label{
-  font-size:.55rem;letter-spacing:.13em;color:var(--dim);
-  display:block;margin-bottom:.3rem;
-}
-textarea,input[type="text"]{
+label{font-size:.55rem;letter-spacing:.13em;color:var(--dim);display:block;margin-bottom:.3rem}
+label .opt{color:var(--dim);font-size:.5rem;margin-left:.3rem}
+label .adm{color:var(--accent3);font-size:.5rem;margin-left:.3rem}
+
+textarea,input[type="text"],input[type="password"]{
   width:100%;background:#13131d;border:1px solid var(--border);
   color:var(--text);font-family:var(--f);font-size:.78rem;
   padding:.55rem .65rem;outline:none;transition:border-color .2s;
-  -webkit-appearance:none;border-radius:0;
-  min-height:44px; /* touch target */
+  -webkit-appearance:none;border-radius:0;min-height:44px;
 }
 textarea{resize:vertical;min-height:76px;line-height:1.6}
-textarea:focus,input[type="text"]:focus{border-color:var(--accent)}
+textarea:focus,input:focus{border-color:var(--accent)}
 textarea::placeholder,input::placeholder{color:var(--dim)}
+input[type="checkbox"]{width:auto;min-height:0;margin-right:.4rem;accent-color:var(--accent3)}
 
-/* URL row */
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+@media(max-width:400px){.row2{grid-template-columns:1fr}}
+
 .url-row{display:flex;gap:.5rem}
 .url-row input{flex:1;min-width:0}
-.url-check{
-  font-family:var(--f);font-size:.58rem;letter-spacing:.1em;
-  border:1px solid var(--border);background:transparent;color:var(--dim);
-  padding:0 .75rem;cursor:pointer;white-space:nowrap;transition:border-color .2s,color .2s;
-  min-height:44px;flex-shrink:0;
-}
+.url-check{font-family:var(--f);font-size:.58rem;border:1px solid var(--border);background:transparent;color:var(--dim);padding:0 .75rem;cursor:pointer;white-space:nowrap;transition:border-color .2s,color .2s;min-height:44px;flex-shrink:0}
 .url-check:hover{border-color:var(--accent);color:var(--accent)}
 .url-st{margin-top:.28rem;font-size:.58rem;min-height:.9rem}
 .url-st.ok{color:var(--accent)}.url-st.er{color:var(--accent2)}
 
-/* Drop zone */
-.drop{
-  border:1px dashed var(--border);background:#13131d;
-  min-height:64px;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:.35rem;
-  cursor:pointer;transition:border-color .2s;padding:.9rem;
-  position:relative;
-}
+.drop{border:1px dashed var(--border);background:#13131d;min-height:64px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.35rem;cursor:pointer;transition:border-color .2s;padding:.9rem;position:relative}
 .drop:hover,.drop.over{border-color:var(--accent)}
 .drop .hint{font-size:.58rem;color:var(--dim);letter-spacing:.1em;pointer-events:none;text-align:center}
-.drop input[type="file"]{
-  position:absolute;inset:0;opacity:0;cursor:pointer;
-  width:100%;height:100%;padding:0;border:none;
-}
+.drop input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;padding:0;border:none}
 .img-pre{width:100%;max-height:130px;object-fit:contain;border:1px solid var(--border);display:none;margin-top:.45rem}
 .img-pre.show{display:block}
 .img-info{font-size:.55rem;color:var(--dim);margin-top:.25rem}
 
-/* Buttons */
 .btn-row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.9rem}
-button{
-  font-family:var(--f);font-size:.65rem;letter-spacing:.13em;
-  cursor:pointer;padding:.55rem 1rem;min-height:44px;
-  border:1px solid var(--accent);background:transparent;color:var(--accent);
-  text-transform:uppercase;transition:background .15s,color .15s;
-  -webkit-appearance:none;border-radius:0;
-}
+button{font-family:var(--f);font-size:.65rem;letter-spacing:.13em;cursor:pointer;
+  padding:.55rem 1rem;min-height:44px;border:1px solid var(--accent);
+  background:transparent;color:var(--accent);text-transform:uppercase;
+  transition:background .15s,color .15s;-webkit-appearance:none;border-radius:0}
 button:hover,button:active{background:var(--accent);color:var(--bg)}
 button:disabled{opacity:.4;cursor:not-allowed}
 button.d{border-color:var(--accent2);color:var(--accent2)}
 button.d:hover,button.d:active{background:var(--accent2);color:var(--bg)}
-@media(max-width:480px){
-  .btn-row{flex-direction:column}
-  .btn-row button{width:100%;justify-content:center}
-}
+button.admin-btn{border-color:var(--accent3);color:var(--accent3)}
+button.admin-btn:hover{background:var(--accent3);color:var(--bg)}
+@media(max-width:480px){.btn-row{flex-direction:column}.btn-row button{width:100%}}
 
-/* Loader */
 .loader{display:none;align-items:center;gap:.6rem;font-size:.62rem;color:var(--accent);letter-spacing:.1em;margin-top:.7rem}
 .loader.show{display:flex}
 .spin{width:13px;height:13px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:sp .6s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
 
-/* Output */
-.out-card{display:none}
-.out-card.vis{display:block}
-.res-url{
-  background:#13131d;border:1px solid var(--border);
-  padding:.75rem;font-size:.75rem;color:var(--accent);
-  word-break:break-all;line-height:1.6;position:relative;
-}
-.cp-badge{
-  position:absolute;top:.4rem;right:.4rem;font-size:.5rem;
-  color:var(--bg);background:var(--accent);padding:2px 6px;
-  opacity:0;transition:opacity .3s;pointer-events:none;
-}
+.out-card{display:none}.out-card.vis{display:block}
+.res-url{background:#13131d;border:1px solid var(--border);padding:.75rem;font-size:.75rem;color:var(--accent);word-break:break-all;line-height:1.6;position:relative}
+.cp-badge{position:absolute;top:.4rem;right:.4rem;font-size:.5rem;color:var(--bg);background:var(--accent);padding:2px 6px;opacity:0;transition:opacity .3s;pointer-events:none}
 .cp-badge.show{opacity:1}
 .id-row{margin-top:.45rem;font-size:.58rem;color:var(--dim)}
 
-/* History */
 .hist-list{display:flex;flex-direction:column;gap:.45rem}
-.hi{
-  background:var(--panel);border:1px solid var(--border);
-  padding:.55rem .8rem;display:flex;align-items:center;
-  gap:.55rem;font-size:.65rem;cursor:pointer;transition:border-color .15s;
-}
+.hi{background:var(--panel);border:1px solid var(--border);padding:.55rem .8rem;
+  display:flex;align-items:center;gap:.55rem;font-size:.65rem;cursor:pointer;transition:border-color .15s}
 .hi:hover{border-color:var(--accent)}
+.hi.admin-hi{border-left:2px solid var(--accent3)}
 .hi-thumb{width:30px;height:30px;object-fit:cover;border:1px solid var(--border);flex-shrink:0}
 .hi-empty{width:30px;height:30px;background:#1a1a25;flex-shrink:0;border:1px solid var(--border)}
 .hi-url-icon{width:30px;height:30px;background:#13131d;flex-shrink:0;border:1px solid var(--accent2);display:flex;align-items:center;justify-content:center;font-size:.48rem;color:var(--accent2)}
@@ -165,73 +115,52 @@ button.d:hover,button.d:active{background:var(--accent2);color:var(--bg)}
 .hi-copy{color:var(--accent2);font-size:.55rem;flex-shrink:0;padding:4px;min-height:0}
 @media(max-width:480px){.hi-id{display:none}}
 
-/* ── Bug Report Modal ──────────────────── */
-.modal-bg{
-  display:none;position:fixed;inset:0;background:#000a;
-  z-index:500;align-items:center;justify-content:center;padding:1rem;
-}
+/* Login modal */
+.modal-bg{display:none;position:fixed;inset:0;background:#000b;z-index:500;align-items:center;justify-content:center;padding:1rem}
 .modal-bg.show{display:flex}
-.modal{
-  background:var(--panel);border:1px solid var(--border2);
-  padding:1.5rem;width:100%;max-width:480px;
-  box-shadow:0 0 60px #7fffb218;
-}
-.modal-title{font-size:.7rem;letter-spacing:.2em;color:var(--accent);margin-bottom:.9rem;display:flex;justify-content:space-between;align-items:center}
-.modal-close{cursor:pointer;color:var(--dim);font-size:1rem;line-height:1;padding:4px;min-height:0;border:none;background:none;font-family:var(--f)}
-.modal-close:hover{color:var(--accent2)}
-.modal textarea{min-height:110px;margin-bottom:.8rem}
-.modal-note{font-size:.55rem;color:var(--dim);line-height:1.5;margin-bottom:.8rem}
+.modal{background:var(--panel);border:1px solid var(--border2);padding:1.5rem;width:100%;max-width:380px}
+.modal-title{font-size:.7rem;letter-spacing:.2em;color:var(--accent3);margin-bottom:.9rem;display:flex;justify-content:space-between;align-items:center}
+.modal-close{cursor:pointer;color:var(--dim);font-size:1rem;line-height:1;padding:4px;border:none;background:none;font-family:var(--f)}
 .modal-status{font-size:.62rem;margin-top:.5rem;min-height:.9rem}
 .modal-status.ok{color:var(--accent)}.modal-status.er{color:var(--accent2)}
 
-/* ── Notification ──────────────────────── */
-.notif{
-  position:fixed;bottom:1.2rem;right:1rem;left:1rem;
-  background:var(--accent);color:var(--bg);
+.notif{position:fixed;bottom:1.2rem;right:1rem;left:1rem;background:var(--accent);color:var(--bg);
   font-size:.62rem;letter-spacing:.1em;padding:.5rem .9rem;
-  opacity:0;transform:translateY(6px);
-  transition:opacity .25s,transform .25s;pointer-events:none;z-index:999;
-  text-align:center;max-width:400px;margin:0 auto;
-}
+  opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s;pointer-events:none;z-index:999;
+  text-align:center;max-width:400px;margin:0 auto}
 .notif.show{opacity:1;transform:translateY(0)}
 .notif.er{background:var(--accent2)}
-@media(min-width:480px){
-  .notif{left:auto;right:1.5rem;max-width:300px;text-align:left;margin:0}
-}
+@media(min-width:480px){.notif{left:auto;right:1.5rem;max-width:300px;text-align:left;margin:0}}
 </style>
 </head>
 <body>
 
-<!-- ── Menubar ─────────────────────────── -->
 <div class="menubar">
-  <div class="traffic">
-    <span class="t-r"></span><span class="t-y"></span><span class="t-g"></span>
-  </div>
+  <div class="traffic"><span class="t-r"></span><span class="t-y"></span><span class="t-g"></span></div>
   <span class="menu-item" onclick="toggleHistory()">History</span>
   <span class="menu-item" onclick="openBugModal()">Bug Report</span>
-  <div class="title">LINE OGP ENCODER v3.0</div>
-  <span class="worker-tag">proud-mode-cd1a</span>
+  <span class="menu-item" id="adminMenu" onclick="toggleAdminLogin()">Admin</span>
+  <div class="title">LINE OGP ENCODER v3.1</div>
+  <span id="adminBadge" style="display:none" class="admin-badge">ADMIN</span>
 </div>
 
-<!-- ── App ────────────────────────────── -->
 <div class="app">
-
   <div class="header">
     <h1>OGP Link Encoder</h1>
     <p>テキスト / URL / 画像 → 短いリンク → LINE プレビュー＆サイト埋め込み</p>
   </div>
 
   <!-- Compose -->
-  <div class="card">
+  <div class="card" id="composeCard">
     <div class="card-title">COMPOSE</div>
 
     <div class="fg">
-      <label>メッセージ (og:title / description)</label>
-      <textarea id="msgInput" placeholder="LINEに表示したいテキスト（省略可）..."></textarea>
+      <label>メッセージ <span class="opt">(省略可)</span></label>
+      <textarea id="msgInput" placeholder="LINEに表示したいテキスト..."></textarea>
     </div>
 
     <div class="fg">
-      <label>リンク先URL（任意）— プロキシ経由でサイトを埋め込み表示</label>
+      <label>リンク先URL <span class="opt">(省略可)</span></label>
       <div class="url-row">
         <input type="text" id="urlInput" placeholder="https://example.com" oninput="onUrlInput()">
         <button class="url-check" onclick="checkUrl()">CHECK</button>
@@ -240,13 +169,35 @@ button.d:hover,button.d:active{background:var(--accent2);color:var(--bg)}
     </div>
 
     <div class="fg">
-      <label>画像（任意）— クリックまたはドロップ</label>
+      <label>画像 <span class="opt">(省略可)</span></label>
       <div class="drop" id="dropZone">
         <input type="file" id="fileInput" accept="image/*" onchange="onFile(event)">
         <span class="hint">CLICK OR DROP IMAGE HERE</span>
       </div>
       <img class="img-pre" id="imgPre" alt="preview">
       <div class="img-info" id="imgInfo"></div>
+    </div>
+
+    <!-- Admin options (hidden unless logged in) -->
+    <div id="adminOptions" style="display:none">
+      <div class="card admin-card" style="margin-bottom:.9rem;padding:1rem">
+        <div class="card-title admin-title">ADMIN OPTIONS</div>
+        <div class="row2">
+          <div class="fg" style="margin-bottom:0">
+            <label>カスタムスラグ <span class="adm">ADMIN</span></label>
+            <input type="text" id="slugInput" placeholder="my-link (英数字-_のみ)" maxlength="32">
+          </div>
+          <div class="fg" style="margin-bottom:0;display:flex;align-items:flex-end">
+            <label style="display:flex;align-items:center;cursor:pointer;padding-bottom:.55rem">
+              <input type="checkbox" id="noCompressCheck">
+              <span style="font-size:.58rem">圧縮なし<span class="adm">ADMIN</span></span>
+            </label>
+          </div>
+        </div>
+        <div class="fg" style="margin-top:.7rem;margin-bottom:0">
+          <label><input type="checkbox" id="permanentCheck"> 永久保存（TTLなし）<span class="adm">ADMIN</span></label>
+        </div>
+      </div>
     </div>
 
     <div class="btn-row">
@@ -276,21 +227,42 @@ button.d:hover,button.d:active{background:var(--accent2);color:var(--bg)}
     <div class="hist-list" id="histList"></div>
     <div class="btn-row"><button class="d" onclick="clearHist()">Clear History</button></div>
   </div>
+</div>
 
-</div><!-- /app -->
+<!-- Admin Login Modal -->
+<div class="modal-bg" id="adminModal" onclick="onAdminBg(event)">
+  <div class="modal">
+    <div class="modal-title">
+      <span>ADMIN LOGIN</span>
+      <button class="modal-close" onclick="closeAdminModal()">✕</button>
+    </div>
+    <div class="fg">
+      <label>Username</label>
+      <input type="text" id="adminUser" placeholder="admin">
+    </div>
+    <div class="fg">
+      <label>Password</label>
+      <input type="password" id="adminPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doAdminLogin()">
+    </div>
+    <div class="btn-row" style="margin-top:0">
+      <button class="admin-btn" onclick="doAdminLogin()">Login</button>
+      <button class="d" onclick="closeAdminModal()">Cancel</button>
+    </div>
+    <div class="modal-status" id="adminStatus"></div>
+  </div>
+</div>
 
-<!-- ── Bug Report Modal ──────────────── -->
-<div class="modal-bg" id="bugModal" onclick="onModalBg(event)">
+<!-- Bug Report Modal -->
+<div class="modal-bg" id="bugModal" onclick="onBugBg(event)">
   <div class="modal">
     <div class="modal-title">
       <span>BUG REPORT</span>
       <button class="modal-close" onclick="closeBugModal()">✕</button>
     </div>
-    <div class="modal-note">
-      エラー内容・再現手順・ブラウザなどを記入してください。<br>
-      管理者のみ閲覧可能です。
+    <div style="font-size:.55rem;color:var(--dim);line-height:1.5;margin-bottom:.8rem">
+      エラー内容・再現手順・ブラウザなどを記入してください。
     </div>
-    <textarea id="bugText" placeholder="例: プロキシでCSSが崩れる。URL: https://... ブラウザ: Safari iOS 17"></textarea>
+    <textarea id="bugText" placeholder="例: プロキシでCSSが崩れる。URL: https://... ブラウザ: Safari iOS 17" style="min-height:110px;margin-bottom:.8rem"></textarea>
     <div class="btn-row" style="margin-top:0">
       <button id="bugBtn" onclick="submitBug()">Send Report</button>
       <button class="d" onclick="closeBugModal()">Cancel</button>
@@ -302,206 +274,251 @@ button.d:hover,button.d:active{background:var(--accent2);color:var(--bg)}
 <div class="notif" id="notif"></div>
 
 <script>
-const WORKER = "https://proud-mode-cd1a.a6068376.workers.dev";
-const PROXY_PREFIX = "/x/";
+const WORKER   = "https://proud-mode-cd1a.a6068376.workers.dev";
 const HIST_KEY = "ogp_hist_v3";
+const ADMIN_KEY= "ogp_admin_session";
 
-let curUrl  = "";
-let imgB64  = null;
-let imgMime = null;
+let curUrl   = "";
+let imgB64   = null;
+let imgMime  = null;
+let adminSession = null; // {user, pass} if logged in
 
-// ── Drag & Drop ─────────────────────────
+// ── Init ─────────────────────────────────────────────────
+function init() {
+  renderHist();
+  // restore admin session
+  try {
+    const s = JSON.parse(sessionStorage.getItem(ADMIN_KEY) || "null");
+    if (s && s.user && s.pass) { adminSession = s; updateAdminUI(); }
+  } catch(e) {}
+}
+
+// ── Admin ─────────────────────────────────────────────────
+function toggleAdminLogin() {
+  if (adminSession) { logoutAdmin(); } else { openAdminModal(); }
+}
+function openAdminModal() { document.getElementById("adminModal").classList.add("show"); }
+function closeAdminModal() { document.getElementById("adminModal").classList.remove("show"); }
+function onAdminBg(e) { if (e.target===document.getElementById("adminModal")) closeAdminModal(); }
+
+async function doAdminLogin() {
+  const user = document.getElementById("adminUser").value.trim();
+  const pass = document.getElementById("adminPass").value;
+  const st   = document.getElementById("adminStatus");
+  if (!user || !pass) { st.textContent="入力してください"; st.className="modal-status er"; return; }
+
+  document.querySelector(".admin-btn").disabled = true;
+  st.textContent = "確認中..."; st.className = "modal-status";
+
+  try {
+    const res = await fetch(WORKER + "/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ user, pass })
+    });
+    const data = await res.json();
+    if (data.ok) {
+      adminSession = { user, pass };
+      sessionStorage.setItem(ADMIN_KEY, JSON.stringify(adminSession));
+      updateAdminUI();
+      closeAdminModal();
+      notify("管理者としてログインしました");
+    } else {
+      st.textContent = "ユーザー名またはパスワードが違います";
+      st.className = "modal-status er";
+    }
+  } catch(e) {
+    st.textContent = "エラー: " + e.message;
+    st.className = "modal-status er";
+  } finally {
+    document.querySelector(".admin-btn").disabled = false;
+  }
+}
+
+function logoutAdmin() {
+  adminSession = null;
+  sessionStorage.removeItem(ADMIN_KEY);
+  updateAdminUI();
+  notify("ログアウトしました");
+}
+
+function updateAdminUI() {
+  const isAdmin = !!adminSession;
+  document.getElementById("adminOptions").style.display = isAdmin ? "block" : "none";
+  document.getElementById("adminBadge").style.display   = isAdmin ? "inline" : "none";
+  document.getElementById("adminMenu").textContent      = isAdmin ? "Logout" : "Admin";
+  document.getElementById("adminMenu").style.color      = isAdmin ? "var(--accent3)" : "";
+}
+
+// ── Drag & Drop ───────────────────────────────────────────
 const dz = document.getElementById("dropZone");
 dz.addEventListener("dragover",  e => { e.preventDefault(); dz.classList.add("over"); });
 dz.addEventListener("dragleave", () => dz.classList.remove("over"));
-dz.addEventListener("drop", e => {
-  e.preventDefault(); dz.classList.remove("over");
-  const f = e.dataTransfer?.files?.[0]; if (f) loadImg(f);
-});
-function onFile(e) { const f = e.target.files?.[0]; if (f) loadImg(f); }
+dz.addEventListener("drop", e => { e.preventDefault(); dz.classList.remove("over"); const f=e.dataTransfer?.files?.[0]; if(f)loadImg(f); });
+function onFile(e) { const f=e.target.files?.[0]; if(f)loadImg(f); }
 
 function loadImg(file) {
-  if (!file.type.startsWith("image/")) { notify("画像ファイルを選択してください", true); return; }
+  if (!file.type.startsWith("image/")) { notify("画像ファイルを選択してください",true); return; }
   const r = new FileReader();
   r.onload = ev => {
     const img = new Image();
     img.onload = () => {
-      const MAX = 1200;
-      let w = img.width, h = img.height;
-      if (w > MAX || h > MAX) { const s = Math.min(MAX/w, MAX/h); w = Math.round(w*s); h = Math.round(h*s); }
-      const c = document.createElement("canvas");
-      c.width = w; c.height = h;
-      c.getContext("2d").drawImage(img, 0, 0, w, h);
-      const mime = file.type === "image/png" ? "image/png" : "image/jpeg";
-      const b64  = c.toDataURL(mime, mime === "image/jpeg" ? 0.82 : undefined);
-      imgB64 = b64; imgMime = mime;
-      const kb = Math.round(b64.length * .75 / 1024);
-      document.getElementById("imgPre").src = b64;
+      const noCompress = adminSession && document.getElementById("noCompressCheck").checked;
+      let w=img.width, h=img.height;
+      if (!noCompress) {
+        const MAX=1200;
+        if (w>MAX||h>MAX){ const s=Math.min(MAX/w,MAX/h); w=Math.round(w*s); h=Math.round(h*s); }
+      }
+      const c=document.createElement("canvas"); c.width=w; c.height=h;
+      c.getContext("2d").drawImage(img,0,0,w,h);
+      const mime = file.type==="image/png" ? "image/png" : "image/jpeg";
+      const quality = noCompress ? 1.0 : 0.82;
+      const b64 = c.toDataURL(mime, mime==="image/jpeg" ? quality : undefined);
+      imgB64=b64; imgMime=mime;
+      const kb=Math.round(b64.length*.75/1024);
+      document.getElementById("imgPre").src=b64;
       document.getElementById("imgPre").classList.add("show");
-      document.getElementById("imgInfo").textContent = `${w}×${h}px  ~${kb}KB`;
+      document.getElementById("imgInfo").textContent=`${w}×${h}px  ~${kb}KB${noCompress?" (無圧縮)":""}`;
     };
-    img.src = ev.target.result;
+    img.src=ev.target.result;
   };
   r.readAsDataURL(file);
 }
 
-// ── URL check ───────────────────────────
-function onUrlInput() {
-  document.getElementById("urlSt").textContent = "";
-  document.getElementById("urlSt").className   = "url-st";
-}
+// ── URL check ─────────────────────────────────────────────
+function onUrlInput() { const el=document.getElementById("urlSt"); el.textContent=""; el.className="url-st"; }
 function checkUrl() {
-  const v  = document.getElementById("urlInput").value.trim();
-  const el = document.getElementById("urlSt");
+  const v=document.getElementById("urlInput").value.trim();
+  const el=document.getElementById("urlSt");
   if (!v) return;
-  try { new URL(v); el.textContent = "✓ 有効なURLです"; el.className = "url-st ok"; }
-  catch { el.textContent = "✗ URLの形式が正しくありません"; el.className = "url-st er"; }
+  try { new URL(v); el.textContent="✓ 有効なURLです"; el.className="url-st ok"; }
+  catch { el.textContent="✗ URLの形式が正しくありません"; el.className="url-st er"; }
 }
 
-// ── Generate ─────────────────────────────
+// ── Generate ──────────────────────────────────────────────
 async function doGen() {
   const text   = document.getElementById("msgInput").value.trim();
   const urlVal = document.getElementById("urlInput").value.trim();
-  if (!text && !imgB64 && !urlVal) {
-    notify("テキスト・URL・画像のいずれかを入力してください", true); return;
-  }
+  if (!text && !imgB64 && !urlVal) { notify("テキスト・URL・画像のいずれかを入力してください",true); return; }
+
   setLoad(true);
   try {
     const body = { text };
-    if (urlVal) body.url      = urlVal;
-    if (imgB64) { body.imageB64 = imgB64; body.mimeType = imgMime; }
+    if (urlVal)  body.url      = urlVal;
+    if (imgB64)  { body.imageB64=imgB64; body.mimeType=imgMime; }
 
-    const res = await fetch(`${WORKER}/store`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
+    // Admin options
+    if (adminSession) {
+      body.adminUser = adminSession.user;
+      body.adminPass = adminSession.pass;
+      const slug = document.getElementById("slugInput").value.trim().replace(/[^a-zA-Z0-9_-]/g,"");
+      if (slug) body.slug = slug;
+      body.noCompress  = document.getElementById("noCompressCheck").checked;
+      body.permanent   = document.getElementById("permanentCheck").checked;
+    }
+
+    const res = await fetch(WORKER+"/store",{
+      method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(body)
     });
     if (!res.ok) throw new Error(await res.text());
 
-    const { id, url } = await res.json();
+    const { id, url, admin } = await res.json();
     curUrl = url;
     document.getElementById("resUrl").textContent = url;
-    document.getElementById("idRow").textContent  = `id: ${id}  (90日で期限切れ)`;
+    document.getElementById("idRow").textContent  =
+      `id: ${id}  ${admin ? "🔒 永久保存 / 管理者" : "(90日で期限切れ)"}`;
     document.getElementById("outCard").classList.add("vis");
 
-    const hist  = getHist();
-    const entry = { id, url, text, targetUrl: urlVal, hasImage: !!imgB64, ts: Date.now() };
-    saveHist([entry, ...hist.filter(h => h.id !== id)].slice(0, 30));
+    const hist = getHist();
+    const entry = { id, url, text, targetUrl:urlVal, hasImage:!!imgB64, admin:!!admin, ts:Date.now() };
+    saveHist([entry,...hist.filter(h=>h.id!==id)].slice(0,30));
     renderHist();
     notify("リンク生成完了！");
-  } catch (e) {
-    notify("エラー: " + e.message, true);
+  } catch(e) {
+    notify("エラー: "+e.message, true);
   } finally {
     setLoad(false);
   }
 }
 
-function setLoad(v) {
-  document.getElementById("loader").classList.toggle("show", v);
-  document.getElementById("genBtn").disabled = v;
-}
+function setLoad(v) { document.getElementById("loader").classList.toggle("show",v); document.getElementById("genBtn").disabled=v; }
 function copyLink() {
   if (!curUrl) return;
-  navigator.clipboard.writeText(curUrl).then(() => {
-    const b = document.getElementById("cpBadge");
-    b.classList.add("show"); setTimeout(() => b.classList.remove("show"), 1800);
-    notify("コピーしました");
-  });
+  navigator.clipboard.writeText(curUrl).then(()=>{ const b=document.getElementById("cpBadge"); b.classList.add("show"); setTimeout(()=>b.classList.remove("show"),1800); notify("コピーしました"); });
 }
-function openLink() { if (curUrl) window.open(curUrl, "_blank"); }
+function openLink() { if (curUrl) window.open(curUrl,"_blank"); }
 function clearAll() {
-  ["msgInput","urlInput"].forEach(id => document.getElementById(id).value = "");
-  document.getElementById("urlSt").textContent = "";
+  ["msgInput","urlInput","slugInput"].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=""; });
+  document.getElementById("urlSt").textContent="";
   document.getElementById("imgPre").classList.remove("show");
-  document.getElementById("imgPre").src = "";
-  document.getElementById("imgInfo").textContent = "";
-  document.getElementById("fileInput").value = "";
+  document.getElementById("imgPre").src="";
+  document.getElementById("imgInfo").textContent="";
+  document.getElementById("fileInput").value="";
   document.getElementById("outCard").classList.remove("vis");
-  imgB64 = null; imgMime = null; curUrl = "";
+  if(document.getElementById("noCompressCheck")) document.getElementById("noCompressCheck").checked=false;
+  if(document.getElementById("permanentCheck"))  document.getElementById("permanentCheck").checked=false;
+  imgB64=null; imgMime=null; curUrl="";
 }
 
-// ── History ──────────────────────────────
-function getHist() { try { return JSON.parse(localStorage.getItem(HIST_KEY) || "[]"); } catch { return []; } }
-function saveHist(a) { localStorage.setItem(HIST_KEY, JSON.stringify(a)); }
-function toggleHistory() {
-  const c = document.getElementById("histCard");
-  c.style.display = c.style.display === "none" ? "block" : "none";
-  if (c.style.display === "block") renderHist();
-}
+// ── History ───────────────────────────────────────────────
+function getHist() { try { return JSON.parse(localStorage.getItem(HIST_KEY)||"[]"); } catch { return []; } }
+function saveHist(a) { localStorage.setItem(HIST_KEY,JSON.stringify(a)); }
+function toggleHistory() { const c=document.getElementById("histCard"); c.style.display=c.style.display==="none"?"block":"none"; if(c.style.display==="block") renderHist(); }
 function clearHist() { saveHist([]); renderHist(); notify("履歴を削除しました"); }
 function renderHist() {
-  const list = document.getElementById("histList");
-  const hist = getHist();
-  if (!hist.length) { list.innerHTML = '<div style="font-size:.62rem;color:var(--dim)">履歴なし</div>'; return; }
-  list.innerHTML = hist.map((h, i) => {
-    let th = h.hasImage
-      ? `<img class="hi-thumb" src="${WORKER}/img/${h.id}" loading="lazy" alt="">`
-      : h.targetUrl
-        ? `<div class="hi-url-icon">URL</div>`
-        : `<div class="hi-empty"></div>`;
-    return `<div class="hi" onclick="reuse(${i})">
+  const list=document.getElementById("histList");
+  const hist=getHist();
+  if (!hist.length) { list.innerHTML='<div style="font-size:.62rem;color:var(--dim)">履歴なし</div>'; return; }
+  list.innerHTML=hist.map((h,i)=>{
+    let th=h.hasImage?`<img class="hi-thumb" src="${WORKER}/img/${h.id}" loading="lazy" alt="">`:
+           h.targetUrl?`<div class="hi-url-icon">URL</div>`:`<div class="hi-empty"></div>`;
+    return `<div class="hi${h.admin?" admin-hi":""}" onclick="reuse(${i})">
       ${th}
-      <div class="hi-text">${eh(h.text || h.targetUrl || "(画像のみ)")}</div>
-      <div class="hi-id">${eh(h.id)}</div>
+      <div class="hi-text">${eh(h.text||h.targetUrl||"(画像のみ)")}</div>
+      <div class="hi-id">${eh(h.id)}${h.admin?" 🔒":""}</div>
       <span class="hi-copy" onclick="event.stopPropagation();cp('${eh(h.url)}')">COPY</span>
     </div>`;
   }).join("");
 }
 function reuse(i) {
-  const h = getHist()[i];
-  curUrl = h.url;
-  document.getElementById("resUrl").textContent = h.url;
-  document.getElementById("idRow").textContent  = `id: ${h.id}`;
+  const h=getHist()[i];
+  curUrl=h.url;
+  document.getElementById("resUrl").textContent=h.url;
+  document.getElementById("idRow").textContent=`id: ${h.id}${h.admin?" 🔒":""}`;
   document.getElementById("outCard").classList.add("vis");
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({top:0,behavior:"smooth"});
 }
-function cp(s) { navigator.clipboard.writeText(s).then(() => notify("コピーしました")); }
+function cp(s) { navigator.clipboard.writeText(s).then(()=>notify("コピーしました")); }
 
-// ── Bug Report ────────────────────────────
+// ── Bug Report ────────────────────────────────────────────
 function openBugModal()  { document.getElementById("bugModal").classList.add("show"); }
 function closeBugModal() { document.getElementById("bugModal").classList.remove("show"); }
-function onModalBg(e) { if (e.target === document.getElementById("bugModal")) closeBugModal(); }
-
+function onBugBg(e)      { if(e.target===document.getElementById("bugModal")) closeBugModal(); }
 async function submitBug() {
-  const desc = document.getElementById("bugText").value.trim();
-  const st   = document.getElementById("bugSt");
-  if (!desc) { st.textContent = "内容を入力してください"; st.className = "modal-status er"; return; }
-
-  document.getElementById("bugBtn").disabled = true;
-  st.textContent = "送信中..."; st.className = "modal-status";
-
+  const desc=document.getElementById("bugText").value.trim();
+  const st=document.getElementById("bugSt");
+  if (!desc) { st.textContent="内容を入力してください"; st.className="modal-status er"; return; }
+  document.getElementById("bugBtn").disabled=true;
+  st.textContent="送信中..."; st.className="modal-status";
   try {
-    const res = await fetch(`${WORKER}/report`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ description: desc }),
-    });
+    const res=await fetch(WORKER+"/report",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({description:desc})});
     if (!res.ok) throw new Error(await res.text());
-    st.textContent = "✓ 送信しました。ありがとうございます！";
-    st.className   = "modal-status ok";
-    document.getElementById("bugText").value = "";
-    setTimeout(closeBugModal, 1800);
-  } catch (e) {
-    st.textContent = "エラー: " + e.message;
-    st.className   = "modal-status er";
-  } finally {
-    document.getElementById("bugBtn").disabled = false;
-  }
+    st.textContent="✓ 送信しました"; st.className="modal-status ok";
+    document.getElementById("bugText").value="";
+    setTimeout(closeBugModal,1800);
+  } catch(e) { st.textContent="エラー: "+e.message; st.className="modal-status er"; }
+  finally { document.getElementById("bugBtn").disabled=false; }
 }
 
-// ── Notify ────────────────────────────────
-function notify(msg, err = false) {
-  const el = document.getElementById("notif");
-  el.textContent = msg;
-  el.classList.toggle("er", err);
-  el.classList.add("show");
-  setTimeout(() => el.classList.remove("show"), 2400);
+// ── Notify ────────────────────────────────────────────────
+function notify(msg,err=false) {
+  const el=document.getElementById("notif");
+  el.textContent=msg; el.classList.toggle("er",err);
+  el.classList.add("show"); setTimeout(()=>el.classList.remove("show"),2400);
 }
-function eh(s) {
-  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-}
+function eh(s) { return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
 
-renderHist();
+init();
 </script>
 </body>
 </html>
