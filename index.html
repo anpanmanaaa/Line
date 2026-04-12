@@ -412,13 +412,13 @@ async function doGen(){
     }
     const res=await fetch(W+"/store",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
     if(!res.ok)throw new Error(await res.text());
-    const{id,url,admin}=await res.json();
+    const{id,url,admin,permanent}=await res.json();
     curUrl=url;
     document.getElementById("rurl").textContent=url;
-    document.getElementById("idr").textContent=`id: ${id}  ${admin?"[PERM 永久保存]":"(90日)"}`;
+    document.getElementById("idr").textContent=`id: ${id}  ${permanent?"[PERM 永久保存]":"(90日)"}`;
     document.getElementById("oc").classList.add("vis");
     const hist=getH();
-    const entry={id,url,text,targetUrl:urlVal,hasImage:!!imgB64,admin:!!admin,ts:Date.now()};
+    const entry={id,url,text,targetUrl:urlVal,hasImage:!!imgB64,admin:!!admin,permanent:!!permanent,ts:Date.now()};
     saveH([entry,...hist.filter(h=>h.id!==id)].slice(0,30));
     renderH();notify("リンク生成完了！");
   }catch(e){notify("エラー: "+e.message,true);}
@@ -449,10 +449,10 @@ function renderH(){
   list.innerHTML=hist.map((h,i)=>{
     let th=h.hasImage?`<img class="ht" src="${W}/img/${h.id}" loading="lazy" alt="">`:
            h.targetUrl?`<div class="hu">URL</div>`:`<div class="he"></div>`;
-    return `<div class="hi${h.admin?" ahi":""}" onclick="reuse(${i})">${th}<div class="hitxt">${eh(h.text||h.targetUrl||"(画像のみ)")}</div><div class="hiid">${eh(h.id)}${h.admin?" [PERM]":""}</div><span class="hcp" onclick="event.stopPropagation();cp('${eh(h.url)}')">COPY</span></div>`;
+    return `<div class="hi${h.admin?" ahi":""}" onclick="reuse(${i})">${th}<div class="hitxt">${eh(h.text||h.targetUrl||"(画像のみ)")}</div><div class="hiid">${eh(h.id)}${h.permanent?" [PERM]":""}</div><span class="hcp" onclick="event.stopPropagation();cp('${eh(h.url)}')">COPY</span></div>`;
   }).join("");
 }
-function reuse(i){const h=getH()[i];curUrl=h.url;document.getElementById("rurl").textContent=h.url;document.getElementById("idr").textContent=`id: ${h.id}${h.admin?" [PERM]":""}`;document.getElementById("oc").classList.add("vis");window.scrollTo({top:0,behavior:"smooth"});}
+function reuse(i){const h=getH()[i];curUrl=h.url;document.getElementById("rurl").textContent=h.url;document.getElementById("idr").textContent=`id: ${h.id}${h.permanent?" [PERM]":""}`;document.getElementById("oc").classList.add("vis");window.scrollTo({top:0,behavior:"smooth"});}
 function cp(s){navigator.clipboard.writeText(s).then(()=>notify("コピーしました"));}
 
 // ── Bug ───────────────────────────────────────────────────
