@@ -12,136 +12,92 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--text);font-family:var(--f);min-height:100vh;display:flex;flex-direction:column}
-
-/* ── メニューバー ── */
-.menubar{height:40px;background:var(--panel2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 12px;gap:0;position:sticky;top:0;z-index:200;font-size:11px;color:var(--dim);user-select:none;flex-shrink:0}
-.traffic{display:flex;gap:5px;margin-right:10px;flex-shrink:0}
+.menubar{height:28px;background:var(--panel2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 10px;gap:14px;position:sticky;top:0;z-index:200;font-size:11px;color:var(--dim);user-select:none;flex-shrink:0}
+.traffic{display:flex;gap:5px;margin-right:4px}
 .traffic span{width:10px;height:10px;border-radius:50%;display:inline-block}
 .t-r{background:#ff5f57}.t-y{background:#ffbd2e}.t-g{background:#28c840}
-.mi{cursor:pointer;padding:0 10px;height:40px;display:flex;align-items:center;transition:color .15s;white-space:nowrap;font-size:11px}
+.mi{cursor:pointer;padding:2px 5px;transition:color .15s;white-space:nowrap}
 .mi:hover{color:var(--accent)}
-.title{flex:1;text-align:center;font-size:9.5px;letter-spacing:.1em;color:var(--dim);padding:0 4px}
-.abadge{font-size:.48rem;background:var(--accent3);color:#0a0a0f;padding:1px 6px;letter-spacing:.08em;display:none;flex-shrink:0}
-
-/* ── アプリ本体 ── */
-.app{flex:1;display:flex;flex-direction:column;align-items:center;padding:1.5rem 1rem 5rem;gap:1.2rem}
-@media(max-width:480px){.app{padding:1rem .75rem 4rem;gap:1rem}}
+.title{flex:1;text-align:center;font-size:9.5px;letter-spacing:.1em;color:var(--dim)}
+.abadge{font-size:.5rem;background:var(--accent3);color:#0a0a0f;padding:1px 5px;letter-spacing:.08em;display:none}
+.app{flex:1;display:flex;flex-direction:column;align-items:center;padding:2rem 1rem 5rem;gap:1.5rem}
 .hdr{text-align:center}
-.hdr h1{font-size:.85rem;letter-spacing:.22em;color:var(--accent);text-transform:uppercase}
-.hdr p{margin-top:.35rem;font-size:.58rem;color:var(--dim);letter-spacing:.06em;line-height:1.6}
-
-/* ── カード ── */
-.card{width:100%;max-width:600px;background:var(--panel);border:1px solid var(--border);padding:1.2rem 1.25rem}
-@media(max-width:480px){.card{padding:1rem .9rem}}
+.hdr h1{font-size:.9rem;letter-spacing:.22em;color:var(--accent);text-transform:uppercase}
+.hdr p{margin-top:.35rem;font-size:.58rem;color:var(--dim);letter-spacing:.08em;line-height:1.5}
+.card{width:100%;max-width:600px;background:var(--panel);border:1px solid var(--border);padding:1.4rem 1.5rem}
 .card.ac{border-color:var(--accent3)50}
-.ct{font-size:.52rem;letter-spacing:.2em;color:var(--dim);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.ct{font-size:.55rem;letter-spacing:.2em;color:var(--dim);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
 .ct::after{content:'';flex:1;height:1px;background:var(--border)}
 .ct.at{color:var(--accent3)}.ct.at::after{background:var(--accent3)40}
 .fg{margin-bottom:.9rem}
-label{font-size:.55rem;letter-spacing:.12em;color:var(--dim);display:block;margin-bottom:.35rem}
+label{font-size:.55rem;letter-spacing:.13em;color:var(--dim);display:block;margin-bottom:.3rem}
 label .opt{color:var(--dim);font-size:.5rem;margin-left:.3rem}
 label .adm{color:var(--accent3);font-size:.5rem;margin-left:.3rem}
-
-/* ── インプット ── */
-textarea,input[type="text"],input[type="password"]{
-  width:100%;background:#13131d;border:1px solid var(--border);color:var(--text);
-  font-family:var(--f);font-size:.8rem;padding:.6rem .7rem;outline:none;
-  transition:border-color .2s;-webkit-appearance:none;border-radius:0;min-height:48px}
-@media(max-width:480px){
-  textarea,input[type="text"],input[type="password"]{font-size:.9rem;min-height:52px;padding:.7rem .75rem}
-}
-textarea{resize:vertical;min-height:80px;line-height:1.6}
+textarea,input[type="text"],input[type="password"]{width:100%;background:#13131d;border:1px solid var(--border);color:var(--text);font-family:var(--f);font-size:.78rem;padding:.55rem .65rem;outline:none;transition:border-color .2s;-webkit-appearance:none;border-radius:0;min-height:44px}
+textarea{resize:vertical;min-height:76px;line-height:1.6}
 textarea:focus,input:focus{border-color:var(--accent)}
 textarea::placeholder,input::placeholder{color:var(--dim)}
-input[type="checkbox"]{width:18px;height:18px;min-height:0;margin-right:.45rem;accent-color:var(--accent3);cursor:pointer;flex-shrink:0}
+input[type="checkbox"]{width:auto;min-height:0;margin-right:.4rem;accent-color:var(--accent3)}
 .r2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
-@media(max-width:480px){.r2{grid-template-columns:1fr}}
+@media(max-width:400px){.r2{grid-template-columns:1fr}}
 .urow{display:flex;gap:.5rem}
 .urow input{flex:1;min-width:0}
-.uck{font-family:var(--f);font-size:.6rem;border:1px solid var(--border);background:transparent;color:var(--dim);padding:0 .85rem;cursor:pointer;white-space:nowrap;transition:border-color .2s,color .2s;min-height:48px;flex-shrink:0}
-@media(max-width:480px){.uck{min-height:52px;font-size:.7rem}}
+.uck{font-family:var(--f);font-size:.58rem;border:1px solid var(--border);background:transparent;color:var(--dim);padding:0 .75rem;cursor:pointer;white-space:nowrap;transition:border-color .2s,color .2s;min-height:44px;flex-shrink:0}
 .uck:hover{border-color:var(--accent);color:var(--accent)}
-.ust{margin-top:.3rem;font-size:.58rem;min-height:.9rem}
+.ust{margin-top:.28rem;font-size:.58rem;min-height:.9rem}
 .ust.ok{color:var(--accent)}.ust.er{color:var(--accent2)}
-
-/* ── ドロップゾーン ── */
-.drop{border:1px dashed var(--border);background:#13131d;min-height:72px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;cursor:pointer;transition:border-color .2s;padding:1rem;position:relative}
-@media(max-width:480px){.drop{min-height:60px;padding:.8rem}}
+.drop{border:1px dashed var(--border);background:#13131d;min-height:64px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;cursor:pointer;transition:border-color .2s;padding:.9rem;position:relative}
 .drop:hover,.drop.over{border-color:var(--accent)}
 .drop .hint{font-size:.58rem;color:var(--dim);letter-spacing:.1em;pointer-events:none;text-align:center}
 .drop input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;padding:0;border:none}
 .ip{width:100%;max-height:130px;object-fit:contain;border:1px solid var(--border);display:none;margin-top:.45rem}
 .ip.show{display:block}
 .iinfo{font-size:.55rem;color:var(--dim);margin-top:.25rem}
-
-/* ── ボタン ── */
 .br{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.9rem}
-button{font-family:var(--f);font-size:.65rem;letter-spacing:.12em;cursor:pointer;padding:.6rem 1.1rem;min-height:48px;border:1px solid var(--accent);background:transparent;color:var(--accent);text-transform:uppercase;transition:background .15s,color .15s;-webkit-appearance:none;border-radius:0}
-@media(max-width:480px){
-  button{font-size:.72rem;min-height:52px;padding:.65rem 1rem}
-  .br{flex-direction:column}.br button{width:100%}
-}
+button{font-family:var(--f);font-size:.65rem;letter-spacing:.13em;cursor:pointer;padding:.55rem 1rem;min-height:44px;border:1px solid var(--accent);background:transparent;color:var(--accent);text-transform:uppercase;transition:background .15s,color .15s;-webkit-appearance:none;border-radius:0}
 button:hover,button:active{background:var(--accent);color:var(--bg)}
 button:disabled{opacity:.4;cursor:not-allowed}
 button.d{border-color:var(--accent2);color:var(--accent2)}
 button.d:hover{background:var(--accent2);color:var(--bg)}
 button.ab{border-color:var(--accent3);color:var(--accent3)}
 button.ab:hover{background:var(--accent3);color:var(--bg)}
-
-/* ── ローダー ── */
+@media(max-width:480px){.br{flex-direction:column}.br button{width:100%}}
 .ldr{display:none;align-items:center;gap:.6rem;font-size:.62rem;color:var(--accent);letter-spacing:.1em;margin-top:.7rem}
 .ldr.show{display:flex}
 .spin{width:13px;height:13px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:sp .6s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
 .oc{display:none}.oc.vis{display:block}
-
-/* ── 生成リンク表示 ── */
-.rurl{background:#13131d;border:1px solid var(--border);padding:.8rem;font-size:.78rem;color:var(--accent);word-break:break-all;line-height:1.6;position:relative;min-height:48px}
-@media(max-width:480px){.rurl{font-size:.85rem;padding:.75rem}}
+.rurl{background:#13131d;border:1px solid var(--border);padding:.75rem;font-size:.75rem;color:var(--accent);word-break:break-all;line-height:1.6;position:relative}
 .cpb{position:absolute;top:.4rem;right:.4rem;font-size:.5rem;color:var(--bg);background:var(--accent);padding:2px 6px;opacity:0;transition:opacity .3s;pointer-events:none}
 .cpb.show{opacity:1}
 .idr{margin-top:.45rem;font-size:.58rem;color:var(--dim)}
-
-/* ── 履歴 ── */
-.hl{display:flex;flex-direction:column;gap:.4rem}
-.hi{background:var(--panel);border:1px solid var(--border);padding:.6rem .85rem;display:flex;align-items:center;gap:.55rem;font-size:.65rem;cursor:pointer;transition:border-color .15s;min-height:52px}
+.hl{display:flex;flex-direction:column;gap:.45rem}
+.hi{background:var(--panel);border:1px solid var(--border);padding:.55rem .8rem;display:flex;align-items:center;gap:.55rem;font-size:.65rem;cursor:pointer;transition:border-color .15s}
 .hi:hover{border-color:var(--accent)}
 .hi.ahi{border-left:2px solid var(--accent3)}
-.ht{width:36px;height:36px;object-fit:cover;border:1px solid var(--border);flex-shrink:0}
-.he{width:36px;height:36px;background:#1a1a25;flex-shrink:0;border:1px solid var(--border)}
-.hu{width:36px;height:36px;background:#13131d;flex-shrink:0;border:1px solid var(--accent2);display:flex;align-items:center;justify-content:center;font-size:.48rem;color:var(--accent2)}
-.hitxt{color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;font-size:.7rem}
+.ht{width:30px;height:30px;object-fit:cover;border:1px solid var(--border);flex-shrink:0}
+.he{width:30px;height:30px;background:#1a1a25;flex-shrink:0;border:1px solid var(--border)}
+.hu{width:30px;height:30px;background:#13131d;flex-shrink:0;border:1px solid var(--accent2);display:flex;align-items:center;justify-content:center;font-size:.48rem;color:var(--accent2)}
+.hitxt{color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
 .hiid{color:var(--dim);font-size:.55rem;flex-shrink:0}
-.hcp{color:var(--accent2);font-size:.58rem;flex-shrink:0;padding:6px 8px;min-height:0;border:1px solid var(--accent2)30}
-@media(max-width:480px){.hiid{display:none}.hcp{font-size:.65rem}}
-
-/* ── モーダル ── */
-.mbg{display:none;position:fixed;inset:0;background:#000c;z-index:500;align-items:flex-end;justify-content:center;padding:0}
-@media(min-width:480px){.mbg{align-items:center;padding:1rem}}
+.hcp{color:var(--accent2);font-size:.55rem;flex-shrink:0;padding:4px;min-height:0}
+@media(max-width:480px){.hiid{display:none}}
+.mbg{display:none;position:fixed;inset:0;background:#000b;z-index:500;align-items:center;justify-content:center;padding:1rem}
 .mbg.show{display:flex}
-.modal{background:var(--panel);border:1px solid var(--border2);padding:1.6rem 1.4rem;width:100%;max-width:400px;border-bottom:none}
-@media(min-width:480px){.modal{border-bottom:1px solid var(--border2)}}
-.mt{font-size:.7rem;letter-spacing:.2em;color:var(--accent3);margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center}
-.mx{cursor:pointer;color:var(--dim);font-size:1.1rem;line-height:1;padding:6px;border:none;background:none;font-family:var(--f);min-height:36px;min-width:36px;display:flex;align-items:center;justify-content:center}
+.modal{background:var(--panel);border:1px solid var(--border2);padding:1.5rem;width:100%;max-width:380px}
+.mt{font-size:.7rem;letter-spacing:.2em;color:var(--accent3);margin-bottom:.9rem;display:flex;justify-content:space-between;align-items:center}
+.mx{cursor:pointer;color:var(--dim);font-size:1rem;line-height:1;padding:4px;border:none;background:none;font-family:var(--f)}
 .mst{font-size:.62rem;margin-top:.5rem;min-height:.9rem}
 .mst.ok{color:var(--accent)}.mst.er{color:var(--accent2)}
-
-/* ── 通知 ── */
-.ntf{position:fixed;bottom:1.2rem;right:1rem;left:1rem;background:var(--accent);color:var(--bg);font-size:.65rem;letter-spacing:.1em;padding:.55rem 1rem;opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s;pointer-events:none;z-index:999;text-align:center;max-width:420px;margin:0 auto}
+.ntf{position:fixed;bottom:1.2rem;right:1rem;left:1rem;background:var(--accent);color:var(--bg);font-size:.62rem;letter-spacing:.1em;padding:.5rem .9rem;opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s;pointer-events:none;z-index:999;text-align:center;max-width:400px;margin:0 auto}
 .ntf.show{opacity:1;transform:translateY(0)}
 .ntf.er{background:var(--accent2)}
 @media(min-width:480px){.ntf{left:auto;right:1.5rem;max-width:300px;text-align:left;margin:0}}
-
-/* ── OGプレビュー ── */
+/* og preview */
 .ogprev{display:none;margin-top:.5rem;background:#13131d;border:1px solid var(--border);padding:.6rem;display:flex;gap:.6rem;align-items:center}
 .ogprev.show{display:flex}
 .ogprev img{width:60px;height:40px;object-fit:cover;border:1px solid var(--border);flex-shrink:0}
 .ogprev .ogt{font-size:.65rem;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-
-/* ── チェックボックス行 ── */
-.cbrow{display:flex;align-items:center;cursor:pointer;gap:.4rem;padding:.3rem 0;min-height:40px}
-.cbrow span{font-size:.6rem;color:var(--dim);line-height:1.4}
-@media(max-width:480px){.cbrow{min-height:44px}.cbrow span{font-size:.68rem}}
 </style>
 </head>
 <body>
@@ -151,7 +107,7 @@ button.ab:hover{background:var(--accent3);color:var(--bg)}
   <span class="mi" onclick="toggleHist()">History</span>
   <span class="mi" onclick="openBug()">Bug</span>
   <span class="mi" id="adminMi" onclick="toggleAdmin()">Admin</span>
-  <div class="title">LINE OGP ENCODER v3.2</div>
+  <div class="title">LINE OGP ENCODER v3.3</div>
   <span id="abadge" class="abadge">ADMIN</span>
 </div>
 
@@ -175,9 +131,9 @@ button.ab:hover{background:var(--accent3);color:var(--bg)}
       </div>
       <div class="ust" id="ust"></div>
       <!-- og:image fetch option -->
-      <label class="cbrow" style="margin-top:.5rem">
+      <label style="margin-top:.5rem;display:flex;align-items:center;cursor:pointer;gap:.4rem">
         <input type="checkbox" id="fetchOg" onchange="onFetchOg()">
-        <span>URLからog:imageを取得してLINEプレビュー画像に使う</span>
+        <span style="font-size:.58rem;color:var(--dim)">URLからog:imageを取得してLINEプレビュー画像に使う</span>
       </label>
       <div class="ogprev" id="ogprev">
         <img id="ogimg" src="" alt="og:image">
@@ -204,16 +160,16 @@ button.ab:hover{background:var(--accent3);color:var(--bg)}
             <input type="text" id="slugI" placeholder="my-link" maxlength="32">
           </div>
           <div class="fg" style="margin-bottom:0;display:flex;align-items:flex-end">
-            <label class="cbrow" style="padding-bottom:.55rem">
+            <label style="display:flex;align-items:center;cursor:pointer;padding-bottom:.55rem">
               <input type="checkbox" id="noComp">
-              <span>圧縮なし <span class="adm">ADMIN</span></span>
+              <span style="font-size:.58rem">圧縮なし <span class="adm">ADMIN</span></span>
             </label>
           </div>
         </div>
         <div style="margin-top:.6rem">
-          <label class="cbrow">
+          <label style="display:flex;align-items:center;cursor:pointer;gap:.4rem">
             <input type="checkbox" id="permI">
-            <span>永久保存（TTLなし）<span class="adm">ADMIN</span></span>
+            <span style="font-size:.58rem">永久保存（TTLなし）<span class="adm">ADMIN</span></span>
           </label>
         </div>
       </div>
@@ -313,13 +269,10 @@ function updAdm(){
   document.getElementById("abadge").style.display=on?"inline":"none";
   document.getElementById("adminMi").textContent=on?"Logout":"Admin";
   document.getElementById("adminMi").style.color=on?"var(--accent3)":"";
-  // ログイン時はチェックボックスをデフォルトOFFにリセット
-  if(on){
-    const permI=document.getElementById("permI");
-    const noComp=document.getElementById("noComp");
-    if(permI)permI.checked=false;
-    if(noComp)noComp.checked=false;
-  }
+  // FIX: ログイン/ログアウト時に権限依存チェックボックスをリセット
+  // 複数ユーザー・セッション間でのチェックボックス状態引き継ぎを防止
+  document.getElementById("noComp").checked=false;
+  document.getElementById("permI").checked=false;
 }
 
 // ── og:image fetch ────────────────────────────────────────
@@ -408,17 +361,21 @@ async function doGen(){
       const slug=document.getElementById("slugI").value.trim().replace(/[^a-zA-Z0-9_-]/g,"");
       if(slug)body.slug=slug;
       body.noCompress=document.getElementById("noComp").checked;
-      body.permanent=document.getElementById("permI").checked;
+      // FIX: permanent フラグのダブルチェック
+      // - adm が true の場合のみ permI チェックボックスの値を反映
+      // - adm が false なら絶対に permanent=false
+      // - これにより権限がないのに永久保存をONにする誤操作を防ぐ
+      body.permanent=adm?document.getElementById("permI").checked:false;
     }
     const res=await fetch(W+"/store",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
     if(!res.ok)throw new Error(await res.text());
-    const{id,url,admin,permanent}=await res.json();
+    const{id,url,admin}=await res.json();
     curUrl=url;
     document.getElementById("rurl").textContent=url;
-    document.getElementById("idr").textContent=`id: ${id}  ${permanent?"[PERM 永久保存]":"(90日)"}`;
+    document.getElementById("idr").textContent=`id: ${id}  ${admin?"🔒 永久保存":"(90日)"}`;
     document.getElementById("oc").classList.add("vis");
     const hist=getH();
-    const entry={id,url,text,targetUrl:urlVal,hasImage:!!imgB64,admin:!!admin,permanent:!!permanent,ts:Date.now()};
+    const entry={id,url,text,targetUrl:urlVal,hasImage:!!imgB64,admin:!!admin,ts:Date.now()};
     saveH([entry,...hist.filter(h=>h.id!==id)].slice(0,30));
     renderH();notify("リンク生成完了！");
   }catch(e){notify("エラー: "+e.message,true);}
@@ -449,10 +406,28 @@ function renderH(){
   list.innerHTML=hist.map((h,i)=>{
     let th=h.hasImage?`<img class="ht" src="${W}/img/${h.id}" loading="lazy" alt="">`:
            h.targetUrl?`<div class="hu">URL</div>`:`<div class="he"></div>`;
-    return `<div class="hi${h.admin?" ahi":""}" onclick="reuse(${i})">${th}<div class="hitxt">${eh(h.text||h.targetUrl||"(画像のみ)")}</div><div class="hiid">${eh(h.id)}${h.permanent?" [PERM]":""}</div><span class="hcp" onclick="event.stopPropagation();cp('${eh(h.url)}')">COPY</span></div>`;
+    return `<div class="hi${h.admin?" ahi":""}" onclick="reuse(${i})">${th}<div class="hitxt">${eh(h.text||h.targetUrl||"(画像のみ)")}</div><div class="hiid">${eh(h.id)}${h.admin?" 🔒":""}</div><span class="hcp" onclick="event.stopPropagation();cp('${eh(h.url)}')">COPY</span></div>`;
   }).join("");
 }
-function reuse(i){const h=getH()[i];curUrl=h.url;document.getElementById("rurl").textContent=h.url;document.getElementById("idr").textContent=`id: ${h.id}${h.permanent?" [PERM]":""}`;document.getElementById("oc").classList.add("vis");window.scrollTo({top:0,behavior:"smooth"});}
+function reuse(i){
+  const h=getH()[i];
+  // FIX: 履歴のadmin権限と現在ユーザーの権限が異なる場合、チェックボックスをリセット
+  // シナリオ: admin:true な履歴を一般ユーザーが復元してもpermIが ON のままになるのを防止
+  if(h.admin&&!adm){
+    alert("このリンクは管理者権限で作成されました。一般ユーザーとしては永久保存は利用できません。チェックボックスがリセットされます。");
+    document.getElementById("permI").checked=false;
+    document.getElementById("noComp").checked=false;
+  }else if(!h.admin&&adm){
+    // 逆に一般ユーザー履歴を管理者が復元する場合も念のためリセット
+    document.getElementById("permI").checked=false;
+    document.getElementById("noComp").checked=false;
+  }
+  curUrl=h.url;
+  document.getElementById("rurl").textContent=h.url;
+  document.getElementById("idr").textContent=`id: ${h.id}${h.admin?" 永久保存":""}`;
+  document.getElementById("oc").classList.add("vis");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
 function cp(s){navigator.clipboard.writeText(s).then(()=>notify("コピーしました"));}
 
 // ── Bug ───────────────────────────────────────────────────
